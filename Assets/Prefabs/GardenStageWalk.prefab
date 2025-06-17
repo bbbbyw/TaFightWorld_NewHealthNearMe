@@ -133,18 +133,13 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4023317082776982387}
-  - {fileID: 4014238835899279703}
   - {fileID: 3462267310819107701}
   - {fileID: 1796864407064739672}
-  - {fileID: 7063793227471297223}
   - {fileID: 8481789033699269050}
-  - {fileID: 1304489049457925812}
   - {fileID: 5064005018360826905}
   - {fileID: 7444536051636408439}
   - {fileID: 3345041578949401291}
   - {fileID: 2453111599603091115}
-  - {fileID: 181602145665934751}
-  - {fileID: 8133313430643290784}
   - {fileID: 6395916308349094420}
   - {fileID: 7458710822573667914}
   - {fileID: 365729125073708818}
@@ -162,7 +157,6 @@ GameObject:
   - component: {fileID: 577261522214119469}
   - component: {fileID: 4343892969886595260}
   - component: {fileID: 3323366441827455701}
-  - component: {fileID: 8133313430643290785}
   m_Layer: 0
   m_Name: WalkPoint
   m_TagString: Untagged
@@ -245,6 +239,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   challengeData: {fileID: 11400000, guid: 65f5df4aa405b6e4da9d04ea7b31a2c8, type: 2}
   isAutoStart: 1
+  isAutoWalkZone: 0
+  autoMoveSpeed: 5
   worldSpaceCanvas: {fileID: 6030366836617113294}
   uiOffset: 1.5
   uiRotation: {x: 0, y: 0, z: 0}
@@ -1838,15 +1834,3 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 23, y: 1.927392}
   m_EdgeRadius: 0
---- !u!114 &8133313430643290785
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3771097982526116595}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 74742e51cbf273b47b75e24f7d211855, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
