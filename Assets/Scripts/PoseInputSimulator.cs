@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Events;
+using Core;
 
 public class PoseInputSimulator : MonoBehaviour
 {
@@ -8,12 +9,13 @@ public class PoseInputSimulator : MonoBehaviour
     [SerializeField] private KeyCode jumpKey = KeyCode.J;
     [SerializeField] private KeyCode stretchKey = KeyCode.S;
     [SerializeField] private KeyCode nodKey = KeyCode.N;
+    [SerializeField] private KeyCode twistKey = KeyCode.A;
 
     // Events
-    public UnityEvent<PoseType> onPoseDetected;
-    public UnityEvent<PoseType> onPoseEnded;
+    public UnityEvent<ChallengeType> onPoseDetected;
+    public UnityEvent<ChallengeType> onPoseEnded;
 
-    private PoseType currentPose = PoseType.None;
+    private ChallengeType currentPose = ChallengeType.None;
 
     private void Update()
     {
@@ -23,19 +25,21 @@ public class PoseInputSimulator : MonoBehaviour
     private void CheckPoseInput()
     {
         // Check for new poses
-        if (Input.GetKeyDown(walkKey)) HandlePoseStart(PoseType.Walk);
-        else if (Input.GetKeyDown(jumpKey)) HandlePoseStart(PoseType.Jump);
-        else if (Input.GetKeyDown(stretchKey)) HandlePoseStart(PoseType.Stretch);
-        else if (Input.GetKeyDown(nodKey)) HandlePoseStart(PoseType.Nod);
+        if (Input.GetKeyDown(walkKey)) HandlePoseStart(ChallengeType.Walk);
+        else if (Input.GetKeyDown(jumpKey)) HandlePoseStart(ChallengeType.Jump);
+        else if (Input.GetKeyDown(twistKey)) HandlePoseStart(ChallengeType.TwistBody);
+        else if (Input.GetKeyDown(stretchKey)) HandlePoseStart(ChallengeType.None);
+        else if (Input.GetKeyDown(nodKey)) HandlePoseStart(ChallengeType.None);
 
         // Check for pose end
-        if (Input.GetKeyUp(walkKey) && currentPose == PoseType.Walk) HandlePoseEnd();
-        else if (Input.GetKeyUp(jumpKey) && currentPose == PoseType.Jump) HandlePoseEnd();
-        else if (Input.GetKeyUp(stretchKey) && currentPose == PoseType.Stretch) HandlePoseEnd();
-        else if (Input.GetKeyUp(nodKey) && currentPose == PoseType.Nod) HandlePoseEnd();
+        if (Input.GetKeyUp(walkKey) && currentPose == ChallengeType.Walk) HandlePoseEnd();
+        else if (Input.GetKeyUp(jumpKey) && currentPose == ChallengeType.Jump) HandlePoseEnd();
+        else if (Input.GetKeyUp(twistKey) && currentPose == ChallengeType.TwistBody) HandlePoseEnd();
+        else if (Input.GetKeyUp(stretchKey) && currentPose == ChallengeType.None) HandlePoseEnd();
+        else if (Input.GetKeyUp(nodKey) && currentPose == ChallengeType.None) HandlePoseEnd();
     }
 
-    private void HandlePoseStart(PoseType pose)
+    private void HandlePoseStart(ChallengeType pose)
     {
         currentPose = pose;
         onPoseDetected?.Invoke(pose);
@@ -44,7 +48,7 @@ public class PoseInputSimulator : MonoBehaviour
     private void HandlePoseEnd()
     {
         onPoseEnded?.Invoke(currentPose);
-        currentPose = PoseType.None;
+        currentPose = ChallengeType.None;
     }
 
     // This will be useful when we switch to MediaPipe
@@ -56,7 +60,7 @@ public class PoseInputSimulator : MonoBehaviour
     public void StopDetection()
     {
         enabled = false;
-        if (currentPose != PoseType.None)
+        if (currentPose != ChallengeType.None)
         {
             HandlePoseEnd();
         }

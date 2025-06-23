@@ -4,463 +4,436 @@ using TMPro;
 using System.Collections;
 using UnityEngine.Events;
 using System.Collections.Generic;
-using UnityEngine.SceneManagement;  // Add this for scene management
+using UnityEngine.SceneManagement;
+using Core;
 
 public class StageManager : MonoBehaviour
 {
     [Header("Stage Configuration")]
-    [SerializeField] private List<GameObject> storyModeSequence = new List<GameObject>();
-    [SerializeField] private List<GameObject> randomPool = new List<GameObject>();
+    public List<GameObject> storyModeSequence;
     [SerializeField] private float blockWidth = 23f;
-    [SerializeField] private bool isShuffleMode;
     [SerializeField] private Transform prefabSpawnPoint;
 
-    [Header("Stage Management")]
-    [SerializeField] private int maxActiveStages = 2;
-    [SerializeField] private float destroyDelay = 1f;
-
     [Header("Stage Settings")]
-    public float transitionDelay = 1f;
-    public int maxFailAttempts = 3;            // Maximum fails allowed before showing fail panel
-    public float stageStartDelay = 1f;
-    public float resultPanelDuration = 2f;
-    public int currentStageIndex = 0;     // Current stage number
-    public bool isLastStage = false;      // Is this the final stage?
-
-    [Header("World Space UI Canvas")]
-    public Canvas worldSpaceCanvas;
-    public float uiOffset = 2f;
-    public Vector3 uiRotation = new Vector3(0, 0, 0);
+    [SerializeField] private float transitionDelay = 1f;
+    [SerializeField] private bool trackStandaloneChallenges = true;
 
     [Header("UI References")]
-    public TextMeshProUGUI titleText;
-    public TextMeshProUGUI instructionText;
-    public TextMeshProUGUI descriptionText;
-    public GameObject successPanel;
-    public GameObject failPanel;
-    public Button retryButton;
-    public Button nextButton;
-    public TextMeshProUGUI failCountText; // Add this to show remaining attempts
+    [SerializeField] private GameObject stageCompletePanel;
+    [SerializeField] private TextMeshProUGUI stageCompleteText;
+    [SerializeField] private GameObject stageFailPanel;
+    [SerializeField] private TextMeshProUGUI attemptsRemainingText;
+    [SerializeField] private GameObject jobNotiUI; // Reference to the JobNoti UI in scene
 
-    [Header("Components")]
-    public PoseInputSimulator poseDetector;
-    public SpriteRenderer backgroundImage;
+    // Game state tracking
+    private bool isGameCompleted = false;
+    public bool IsGameCompleted => isGameCompleted;
 
-    [Header("Challenge Tracking")]
-    public List<ChallengeTriggerZone> stageChallengeTriggers;  // All challenges in this stage
-    
-    private Dictionary<ChallengeTriggerZone, bool> challengeCompletionStatus = new Dictionary<ChallengeTriggerZone, bool>();
-    private Dictionary<ChallengeTriggerZone, int> challengeFailAttempts = new Dictionary<ChallengeTriggerZone, int>();
-    private List<GameObject> activeStages = new List<GameObject>();
-    private System.Random random;
-    private GameObject lastSpawnedPrefab;
-    private Transform playerTransform;
-    private bool isStageActive = false;
-    private int totalFailAttempts = 0;
-    private Vector3 checkpointPosition;
+    // Stage management
+    private int currentStageIndex = 0;
+    private bool canSpawnNextStage = true;
+    private GameObject currentStagePrefab;
+    private ChallengeTriggerZone[] challengeZones;
+
+    // Challenge tracking
+    private List<ChallengeTriggerZone> standaloneZones = new List<ChallengeTriggerZone>();
+    private List<ChallengeTriggerZone> completedStandaloneZones = new List<ChallengeTriggerZone>();
+    private int completedChallenges = 0;
+    private bool isStageComplete = false;
+
+    // Fail state tracking
+    private int currentFailCount = 0;
+    private bool hasShownCompletion = false;
+    private const int maxFailAttempts = 3;
 
     private void Start()
     {
-        random = new System.Random();
-        SpawnInitialStage();
-
-        // Initialize challenge tracking
-        foreach (var challenge in stageChallengeTriggers)
-        {
-            challengeCompletionStatus[challenge] = false;
-            challengeFailAttempts[challenge] = 0;
-            
-            // Subscribe to challenge events
-            challenge.onChallengeSuccess.AddListener(() => OnChallengeSuccess(challenge));
-            challenge.onChallengeFail.AddListener(() => OnChallengeFail(challenge));
-        }
-
-        // Setup event listeners
-        poseDetector.onPoseDetected.AddListener(OnPoseDetected);
-        nextButton.onClick.AddListener(NextStage);
-
-        // Hide all UI initially
-        SetUIVisibility(false);
+        Debug.Log("[StageManager] Starting with maxFailAttempts: " + maxFailAttempts);
         
-        // Find player if not set
-        if (playerTransform == null)
-            playerTransform = GameObject.FindGameObjectWithTag("Player")?.transform;
-
-        // Set initial checkpoint
-        if (playerTransform != null)
-            checkpointPosition = playerTransform.position;
-
-        // Start stage with delay
-        Invoke("StartStage", stageStartDelay);
-
-        // Update fail count display
-        UpdateFailCountDisplay();
-    }
-
-    private void Update()
-    {
-        if (!isStageActive || playerTransform == null) return;
-
-        // Check if player has fallen below a certain point
-        if (playerTransform.position.y < -10f)
-        {
-            OnChallengeFail(null); // Trigger fail when player falls
-        }
-    }
-
-    private void UpdateFailCountDisplay()
-    {
-        if (failCountText != null)
-        {
-            int remainingAttempts = maxFailAttempts - totalFailAttempts;
-            failCountText.text = $"Attempts Remaining: {remainingAttempts}";
-        }
-    }
-
-    private void SpawnInitialStage()
-    {
         if (storyModeSequence == null || storyModeSequence.Count == 0)
         {
-            Debug.LogError("No stage prefabs assigned to story mode sequence!");
+            Debug.LogWarning("No story mode sequence assigned - will only track standalone challenges");
+        }
+
+        if (stageCompletePanel != null)
+        {
+            stageCompletePanel.SetActive(false);
+        }
+
+        if (stageFailPanel != null)
+        {
+            stageFailPanel.SetActive(false);
+        }
+
+        // Find all standalone challenge zones in the scene
+        if (trackStandaloneChallenges)
+        {
+            var allZones = FindObjectsByType<ChallengeTriggerZone>(FindObjectsSortMode.None);
+            foreach (var zone in allZones)
+            {
+                // If the zone is not part of any story sequence prefab, consider it standalone
+                if (!IsPartOfStorySequence(zone.gameObject))
+                {
+                    standaloneZones.Add(zone);
+                    Debug.Log($"[StageManager] Found standalone challenge zone at position: {zone.transform.position}");
+                }
+            }
+        }
+
+        UpdateAttemptsRemainingUI();
+    }
+
+    private bool IsPartOfStorySequence(GameObject obj)
+    {
+        if (storyModeSequence == null) return false;
+        
+        // Check if this object is a child of any story sequence prefab
+        foreach (var prefab in storyModeSequence)
+        {
+            if (prefab == null) continue;
+            
+            // Get all ChallengeTriggerZones in the prefab
+            var prefabZones = prefab.GetComponentsInChildren<ChallengeTriggerZone>(true);
+            foreach (var zone in prefabZones)
+            {
+                if (zone.gameObject == obj)
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public void OnPrefabSpawnPointReached()
+    {
+        Debug.Log($"[StageManager] OnPrefabSpawnPointReached - Current fail count: {currentFailCount}, Current stage index: {currentStageIndex}");
+        
+        if (!canSpawnNextStage) return;
+        
+        // Check if we have more stages to spawn
+        if (currentStageIndex >= storyModeSequence.Count)
+        {
+            Debug.Log("[StageManager] All story stages have been spawned");
             return;
         }
 
-        GameObject initialStage = Instantiate(
-            isShuffleMode ? GetRandomStagePrefab() : storyModeSequence[0],
-            prefabSpawnPoint.position,
-            Quaternion.identity
-        );
-
-        activeStages.Add(initialStage);
-        lastSpawnedPrefab = initialStage;
+        // Spawn next stage
+        SpawnCurrentStagePrefab();
+        currentStageIndex++;
+        
+        Debug.Log($"[StageManager] Spawned stage {currentStageIndex}/{storyModeSequence.Count}");
     }
 
-    private void SpawnNextStage()
+    private void SpawnCurrentStagePrefab()
     {
-        if (currentStageIndex >= storyModeSequence.Count && !isShuffleMode) return;
-
-        // Calculate spawn position
-        Vector3 spawnPosition;
-        if (activeStages.Count > 0)
+        Debug.Log($"[StageManager] SpawnCurrentStagePrefab - Current fail count before spawn: {currentFailCount}");
+        
+        if (currentStageIndex >= storyModeSequence.Count)
         {
-            // Get the rightmost position of the last spawned stage
-            Transform lastStage = activeStages[activeStages.Count - 1].transform;
-            Renderer[] renderers = lastStage.GetComponentsInChildren<Renderer>();
-            float rightmostPoint = float.MinValue;
-            
-            foreach (Renderer renderer in renderers)
+            Debug.LogWarning("Attempted to spawn stage beyond sequence length!");
+            return;
+        }
+
+        // Prevent spawning while processing
+        canSpawnNextStage = false;
+
+        // Calculate spawn position - always use the same formula
+        Vector3 spawnPosition = new Vector3(26.8f + (currentStageIndex * blockWidth), -1.610113f, 0f);
+
+        currentStagePrefab = Instantiate(storyModeSequence[currentStageIndex], spawnPosition, Quaternion.identity);
+        
+        // Get all challenge zones in the stage
+        challengeZones = currentStagePrefab.GetComponentsInChildren<ChallengeTriggerZone>();
+
+        Debug.Log($"[StageManager] Spawned stage {currentStageIndex + 1} with {challengeZones.Length} challenges at position {spawnPosition}. Current fail count after spawn: {currentFailCount}");
+
+        // Allow spawning next stage after this one is spawned
+        canSpawnNextStage = true;
+    }
+
+    private void UpdateAttemptsRemainingUI()
+    {
+        if (attemptsRemainingText != null)
+        {
+            int remainingAttempts = maxFailAttempts - currentFailCount;
+            Debug.Log($"[StageManager] Updating UI - Current fail count: {currentFailCount}, Remaining attempts: {remainingAttempts}");
+            attemptsRemainingText.text = $"Attempts Remaining: {remainingAttempts}";
+        }
+    }
+
+    public void OnChallengeSuccess(ChallengeTriggerZone zone)
+    {
+        // Handle standalone challenges
+        if (standaloneZones.Contains(zone))
+        {
+            Debug.Log($"[StageManager] Standalone challenge completed at position: {zone.transform.position}");
+            if (!completedStandaloneZones.Contains(zone))
             {
-                float right = renderer.bounds.max.x;
-                if (right > rightmostPoint)
-                    rightmostPoint = right;
+                completedStandaloneZones.Add(zone);
+                Debug.Log($"[StageManager] Total completed standalone challenges: {completedStandaloneZones.Count}/{standaloneZones.Count}");
             }
-            
-            // Add some padding between stages
-            spawnPosition = new Vector3(rightmostPoint + 2f, prefabSpawnPoint.position.y, prefabSpawnPoint.position.z);
+            HandleChallengeSuccess(zone);
+            return;
+        }
+
+        // Handle story sequence challenges
+        HandleChallengeSuccess(zone);
+    }
+
+    private void HandleChallengeSuccess(ChallengeTriggerZone zone)
+    {
+        // Show challenge success UI from challenge data
+        if (zone.challengeData != null)
+        {
+            GameObject successUI = null;
+            if (zone.challengeData.challengeType == ChallengeType.Walk && zone.challengeData.walkSuccessUI != null)
+            {
+                Vector3 spawnPosition = zone.transform.position + Vector3.up * 2f;
+                successUI = Instantiate(zone.challengeData.walkSuccessUI, spawnPosition, Quaternion.identity);
+                Destroy(successUI, 2f);
+            }
+            else if (zone.challengeData.challengeType == ChallengeType.Jump && zone.challengeData.jumpSuccessUI != null)
+            {
+                Vector3 spawnPosition = zone.transform.position + Vector3.up * 2f;
+                successUI = Instantiate(zone.challengeData.jumpSuccessUI, spawnPosition, Quaternion.identity);
+                Destroy(successUI, 2f);
+            }
+            else if (zone.challengeData.challengeType == ChallengeType.TwistBody)
+            {
+                // Stop player movement for TwistBody challenge
+                var player = GameObject.FindGameObjectWithTag("Player");
+                if (player != null)
+                {
+                    // Stop auto walk if exists
+                    var autoWalk = player.GetComponent<PlayerAutoWalk>();
+                    if (autoWalk != null)
+                    {
+                        Destroy(autoWalk);
+                    }
+                    
+                    // Disable movement through PlayerController
+                    var playerController = player.GetComponent<PlayerController>();
+                    if (playerController != null)
+                    {
+                        playerController.EnableMovement(false);
+                    }
+                }
+                
+                // For TwistBody, show JobNoti UI first
+                if (jobNotiUI != null)
+                {
+                    jobNotiUI.SetActive(true);
+                    var twistUI = jobNotiUI.GetComponent<TwistBodyUI>();
+                    if (twistUI != null)
+                    {
+                        // Pass both the zone and this StageManager to TwistBodyUI
+                        twistUI.Initialize(zone, this);
+                    }
+                }
+                else
+                {
+                    // If no JobNoti UI, just show success UI and complete game
+                    if (zone.challengeData.twistSuccessUI != null)
+                    {
+                        Vector3 spawnPosition = zone.transform.position + Vector3.up * 2f;
+                        successUI = Instantiate(zone.challengeData.twistSuccessUI, spawnPosition, Quaternion.identity);
+                        Destroy(successUI, 2f);
+                    }
+                    ShowGameCompletion();
+                }
+            }
+        }
+    }
+
+    // New method to be called by TwistBodyUI when story is complete
+    public void OnTwistStoryComplete(ChallengeTriggerZone zone)
+    {
+        if (zone.challengeData != null && zone.challengeData.twistSuccessUI != null)
+        {
+            Vector3 spawnPosition = zone.transform.position + Vector3.up * 2f;
+            GameObject successUI = Instantiate(zone.challengeData.twistSuccessUI, spawnPosition, Quaternion.identity);
+            Destroy(successUI, 2f);
+        }
+        // Show game completion instead of checking stage completion
+        ShowGameCompletion();
+    }
+
+
+    public void OnChallengeFail(ChallengeTriggerZone zone)
+    {
+        // Handle both standalone and story sequence challenges
+        currentFailCount++;
+        Debug.Log($"[StageManager] Challenge failed at {zone.transform.position}. Type: {zone.challengeData.challengeType}, Current fail count: {currentFailCount}, Max attempts: {maxFailAttempts}");
+        Debug.Log($"[StageManager] Challenge is part of prefab: {zone.transform.root.name}");
+        
+        UpdateAttemptsRemainingUI();
+
+        // Show challenge fail UI from challenge data
+        if (zone.challengeData != null)
+        {
+            GameObject failUI = null;
+            if (zone.challengeData.challengeType == ChallengeType.Walk && zone.challengeData.walkFailureUI != null)
+            {
+                Vector3 spawnPosition = zone.transform.position + Vector3.up * 2f;
+                failUI = Instantiate(zone.challengeData.walkFailureUI, spawnPosition, Quaternion.identity);
+                Destroy(failUI, 2f);
+            }
+            else if (zone.challengeData.challengeType == ChallengeType.Jump && zone.challengeData.jumpFailureUI != null)
+            {
+                Vector3 spawnPosition = zone.transform.position + Vector3.up * 2f;
+                failUI = Instantiate(zone.challengeData.jumpFailureUI, spawnPosition, Quaternion.identity);
+                Destroy(failUI, 2f);
+            }
+            else if (zone.challengeData.challengeType == ChallengeType.TwistBody && zone.challengeData.twistFailureUI != null)
+            {
+                Vector3 spawnPosition = zone.transform.position + Vector3.up * 2f;
+                failUI = Instantiate(zone.challengeData.twistFailureUI, spawnPosition, Quaternion.identity);
+                Destroy(failUI, 2f);
+            }
+        }
+
+        // Check if max attempts reached immediately
+        if (currentFailCount >= maxFailAttempts)
+        {
+            Debug.Log("[StageManager] Max fail attempts reached, showing fail panel");
+            StartCoroutine(ShowStageFailPanel());
         }
         else
         {
-            // First stage spawns at the spawn point
-            spawnPosition = prefabSpawnPoint.position;
+            // Restart the challenge if not max attempts
+            Debug.Log($"[StageManager] Restarting challenge - Attempts remaining: {maxFailAttempts - currentFailCount}");
+            zone.RestartChallenge();
         }
+    }
 
-        // Spawn the stage
-        GameObject stagePrefab;
-        if (isShuffleMode)
+    private IEnumerator ShowStageFailPanel()
+    {
+        Debug.Log("[StageManager] Showing stage fail panel");
+        if (stageFailPanel != null)
         {
-            stagePrefab = randomPool[Random.Range(0, randomPool.Count)];
+            stageFailPanel.SetActive(true);
+            yield return new WaitForSeconds(2f);
+            stageFailPanel.SetActive(false);
+            RestartStage();
         }
         else
         {
-            stagePrefab = storyModeSequence[currentStageIndex];
-        }
-
-        GameObject newStage = Instantiate(stagePrefab, spawnPosition, Quaternion.identity);
-        activeStages.Add(newStage);
-
-        // Clean up old stages if we have too many
-        while (activeStages.Count > maxActiveStages)
-        {
-            GameObject oldestStage = activeStages[0];
-            activeStages.RemoveAt(0);
-            Destroy(oldestStage, destroyDelay);
-        }
-
-        if (!isShuffleMode)
-            currentStageIndex++;
-    }
-
-    public void ExtendWalkSection()
-    {
-        // Find the last spawned walk stage prefab
-        GameObject walkPrefab = null;
-        foreach (var prefab in isShuffleMode ? randomPool : storyModeSequence)
-        {
-            if (prefab.name.Contains("Walk"))
-            {
-                walkPrefab = prefab;
-                break;
-            }
-        }
-
-        if (walkPrefab != null)
-        {
-            // Spawn an additional walk section
-            Vector3 spawnPosition = lastSpawnedPrefab.transform.position + Vector3.right * blockWidth;
-            GameObject extendedWalk = Instantiate(walkPrefab, spawnPosition, Quaternion.identity);
-            activeStages.Add(extendedWalk);
-            lastSpawnedPrefab = extendedWalk;
-
-            // Clean up old stages
-            while (activeStages.Count > maxActiveStages)
-            {
-                GameObject oldestStage = activeStages[0];
-                activeStages.RemoveAt(0);
-                Destroy(oldestStage, destroyDelay);
-            }
+            Debug.LogWarning("Stage fail panel is null!");
+            RestartStage();
+            yield break;
         }
     }
 
-    private GameObject GetRandomStagePrefab()
+    private IEnumerator CompleteStage()
     {
-        if (randomPool == null || randomPool.Count == 0)
-        {
-            Debug.LogError("No stage prefabs in random pool!");
-            return null;
-        }
-        return randomPool[random.Next(randomPool.Count)];
-    }
-
-    public void StartStage()
-    {
-        isStageActive = true;
-        totalFailAttempts = 0;
+        Debug.Log($"[StageManager] CompleteStage - Current fail count before completion: {currentFailCount}");
+        isStageComplete = true;
         
-        // Reset all challenge statuses
-        foreach (var challenge in stageChallengeTriggers)
+        // Wait for transition
+        yield return new WaitForSeconds(transitionDelay);
+
+        // Reset stage progress but keep fail count
+        Debug.Log($"[StageManager] Preparing for next stage - Keeping fail count at: {currentFailCount}");
+        completedChallenges = 0;
+        isStageComplete = false;
+        Debug.Log("[StageManager] Stage transition complete");
+    }
+
+    // New method to show game completion after TwistBody challenge
+    public void ShowGameCompletion()
+    {
+        if (!hasShownCompletion && stageCompletePanel != null)
         {
-            challengeCompletionStatus[challenge] = false;
-            challengeFailAttempts[challenge] = 0;
+            hasShownCompletion = true;
+            isGameCompleted = true; // Set game completion state
+            stageCompletePanel.SetActive(true);
+            if (stageCompleteText != null)
+            {
+                stageCompleteText.text = "Congratulations!\nYou got the job!";
+            }
+            // Reset fail count when game is complete
+            currentFailCount = 0;
+            UpdateAttemptsRemainingUI();
+
+            // Log completion for debugging/analytics
+            Debug.Log("[StageManager] Game completed! Player got the job!");
+        }
+    }
+
+    public void RestartStage()
+    {
+        Debug.Log("[StageManager] Restarting stage - Resetting fail count from: " + currentFailCount);
+        currentFailCount = 0;  // Reset fail count only when explicitly restarting stage
+        completedChallenges = 0;
+        isStageComplete = false;
+
+        // Clean up current stage
+        if (currentStagePrefab != null)
+        {
+            Debug.Log($"[StageManager] Destroying current stage prefab: {currentStagePrefab.name}");
+            Destroy(currentStagePrefab);
         }
 
-        SetUIVisibility(true);
-        if (successPanel) successPanel.SetActive(false);
-        if (failPanel) failPanel.SetActive(false);
+        // Update UI
+        UpdateAttemptsRemainingUI();
+        if (stageFailPanel != null)
+        {
+            stageFailPanel.SetActive(false);
+        }
+
+        // Respawn current stage
+        SpawnCurrentStagePrefab();
+    }
+
+    public void RestartGame()
+    {
+        Debug.Log("[StageManager] Restarting game - Resetting all progress");
+        // Reset all progress
+        currentStageIndex = 0;
+        completedChallenges = 0;
+        currentFailCount = 0;  // Reset fail count when restarting entire game
+        isStageComplete = false;
+        hasShownCompletion = false;
+        isGameCompleted = false; // Reset game completion state
+        completedStandaloneZones.Clear();
         
-        onStageStart?.Invoke();
+        // Reload the scene
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
-    private void OnChallengeSuccess(ChallengeTriggerZone challenge)
+    // Method for save system to get game state
+    public GameState GetGameState()
     {
-        // Mark this challenge as completed
-        challengeCompletionStatus[challenge] = true;
-
-        // Update checkpoint position
-        if (playerTransform != null)
-            checkpointPosition = playerTransform.position;
-
-        // Check if all challenges are completed
-        bool allChallengesCompleted = true;
-        foreach (var status in challengeCompletionStatus.Values)
+        return new GameState
         {
-            if (!status)
-            {
-                allChallengesCompleted = false;
-                break;
-            }
-        }
-
-        // If all challenges completed, show success panel
-        if (allChallengesCompleted)
-        {
-            ShowStageSuccess();
-        }
+            IsCompleted = isGameCompleted,
+            CurrentFailCount = currentFailCount,
+            HasShownCompletion = hasShownCompletion
+        };
     }
 
-    private void OnChallengeFail(ChallengeTriggerZone challenge)
+    // Method for save system to restore game state
+    public void RestoreGameState(GameState state)
     {
-        if (challenge != null)
-            challengeFailAttempts[challenge]++;
+        isGameCompleted = state.IsCompleted;
+        currentFailCount = state.CurrentFailCount;
+        hasShownCompletion = state.HasShownCompletion;
         
-        totalFailAttempts++;
-        UpdateFailCountDisplay();
-
-        // If total fails reach max, show game over
-        if (totalFailAttempts >= maxFailAttempts)
+        // Update UI
+        UpdateAttemptsRemainingUI();
+        if (stageCompletePanel != null)
         {
-            ShowGameOver();
-        }
-        else
-        {
-            // Reset player to checkpoint
-            if (playerTransform != null)
-            {
-                playerTransform.position = checkpointPosition;
-                var rb = playerTransform.GetComponent<Rigidbody2D>();
-                if (rb != null)
-                    rb.linearVelocity = Vector2.zero;
-            }
+            stageCompletePanel.SetActive(hasShownCompletion);
         }
     }
+}
 
-    private void ShowGameOver()
-    {
-        isStageActive = false;
-        SetUIVisibility(false);
-        
-        if (failPanel)
-        {
-            failPanel.SetActive(true);
-            // Optional: Show game over text or special UI
-        }
-    }
-
-    public void RetryStage()
-    {
-        // Only allow retry if we haven't exceeded max attempts
-        if (totalFailAttempts < maxFailAttempts)
-        {
-            HideFailPanel();
-            
-            // Reset player to checkpoint
-            if (playerTransform != null)
-            {
-                playerTransform.position = checkpointPosition;
-                var rb = playerTransform.GetComponent<Rigidbody2D>();
-                if (rb != null)
-                    rb.linearVelocity = Vector2.zero;
-            }
-
-            StartStage();
-        }
-        else
-        {
-            ShowGameOver();
-        }
-    }
-
-    public void NextStage()
-    {
-        // Hide the success panel
-        if (successPanel) 
-            successPanel.SetActive(false);
-
-        if (isLastStage)
-        {
-            // If this is the last stage, you might want to:
-            // 1. Load a victory scene
-            // 2. Show final score
-            // 3. Return to menu
-            Debug.Log("Game Complete!");
-            // Example: Load victory scene
-            // SceneManager.LoadScene("VictoryScene");
-        }
-        else
-        {
-            // Load the next stage
-            currentStageIndex++;
-            string nextSceneName = "Stage" + (currentStageIndex + 1);
-            
-            // Check if the next scene exists
-            if (SceneUtility.GetBuildIndexByScenePath(nextSceneName) != -1)
-            {
-                SceneManager.LoadScene(nextSceneName);
-            }
-            else
-            {
-                Debug.LogWarning("Next stage scene not found: " + nextSceneName);
-                // Fallback to some default behavior
-            }
-        }
-    }
-
-    private void OnPoseDetected(PoseType pose)
-    {
-        if (activeStages.Count == 0) return;
-
-        GameObject currentStage = activeStages[activeStages.Count - 1];
-        if (pose == currentStage.GetComponent<Stage>().requiredPose)
-        {
-            CompleteStage();
-        }
-    }
-
-    private void CompleteStage()
-    {
-        if (activeStages.Count == 0) return;
-
-        GameObject currentStage = activeStages[activeStages.Count - 1];
-        activeStages.RemoveAt(activeStages.Count - 1);
-        Destroy(currentStage, destroyDelay);
-
-        // Show success
-        StartCoroutine(ShowSuccess());
-
-        // Notify listeners
-        onStageComplete?.Invoke();
-    }
-
-    private IEnumerator ShowSuccess()
-    {
-        successPanel.SetActive(true);
-
-        if (activeStages.Count > 0)
-        {
-            // Wait for button press or auto-advance
-            if (transitionDelay <= 0)
-            {
-                nextButton.gameObject.SetActive(true);
-            }
-            else
-            {
-                yield return new WaitForSeconds(transitionDelay);
-                NextStage();
-            }
-        }
-        else
-        {
-            Debug.Log("Game Complete!");
-        }
-    }
-
-    private void SetUIVisibility(bool visible)
-    {
-        if (titleText != null) titleText.gameObject.SetActive(visible);
-        if (instructionText != null) instructionText.gameObject.SetActive(visible);
-        if (descriptionText != null) descriptionText.gameObject.SetActive(visible);
-        if (successPanel != null) successPanel.SetActive(false);
-        if (failPanel != null) failPanel.SetActive(false);
-    }
-
-    private void HideFailPanel()
-    {
-        if (failPanel != null)
-            failPanel.SetActive(false);
-    }
-
-    private void HideSuccessPanel()
-    {
-        if (successPanel != null)
-            successPanel.SetActive(false);
-    }
-
-    private void ShowStageSuccess()
-    {
-        isStageActive = false;
-        SetUIVisibility(false);
-        
-        if (successPanel)
-        {
-            successPanel.SetActive(true);
-            // Optional: Auto-hide if no next button
-            if (nextButton == null)
-                Invoke("HideSuccessPanel", resultPanelDuration);
-        }
-        
-        onStageComplete?.Invoke();
-    }
-
-    // Events that other scripts can listen to
-    public UnityEvent onStageStart;
-    public UnityEvent onStageComplete;
+// Class to hold save data (can be serialized)
+[System.Serializable]
+public class GameState
+{
+    public bool IsCompleted;
+    public int CurrentFailCount;
+    public bool HasShownCompletion;
 } 
