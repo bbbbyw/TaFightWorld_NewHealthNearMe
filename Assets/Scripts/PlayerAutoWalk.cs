@@ -8,7 +8,7 @@ public class PlayerAutoWalk : MonoBehaviour
     private bool wasMoving = false;
     private Vector2 lastPosition;
     private float stuckTimer = 0f;
-    private const float STUCK_THRESHOLD = 0.1f;
+    private const float STUCK_THRESHOLD = 0.015f;
     private const float STUCK_CHECK_DISTANCE = 0.001f; // ระยะทางขั้นต่ำที่ควรเคลื่อนที่ได้
     private const float UNSTUCK_FORCE = 0.1f; // แรงที่ใช้ในการแก้ติด
 
