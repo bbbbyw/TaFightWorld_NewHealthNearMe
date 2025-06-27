@@ -8,6 +8,10 @@ public class LaundryStageData : ScriptableObject
     {
         public LaundryActionType actionType;
         public string challengeText;
+        
+        [Header("Animation")]
+        public float additionalHoldTime = 0f;  // เวลาเพิ่มเติมที่จะรอหลังจาก animation เล่นจบ
+        
         [Header("Debug")]
         public KeyCode successKey = KeyCode.A;
         public KeyCode failKey = KeyCode.UpArrow;
