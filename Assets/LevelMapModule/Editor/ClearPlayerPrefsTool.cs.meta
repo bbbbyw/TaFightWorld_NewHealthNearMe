@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 0073dd94a0845eb4cad71a4b17932fcd
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 322284
+  packageName: Level Map System - Complete MVC Solution
+  packageVersion: 1.0
+  assetPath: Assets/LevelMapModule/Editor/ClearPlayerPrefsTool.cs
+  uploadId: 766588

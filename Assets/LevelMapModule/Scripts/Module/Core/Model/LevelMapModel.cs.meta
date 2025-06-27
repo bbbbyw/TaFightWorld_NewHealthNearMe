@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 0717f10888405df4b8f9850bf7d7b28c
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 322284
+  packageName: Level Map System - Complete MVC Solution
+  packageVersion: 1.0
+  assetPath: Assets/LevelMapModule/Scripts/Module/Core/Model/LevelMapModel.cs
+  uploadId: 766588

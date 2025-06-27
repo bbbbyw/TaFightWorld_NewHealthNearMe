@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 0e26dbfe67ca95544b90fe0d061b684d
+AssemblyDefinitionImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 322284
+  packageName: Level Map System - Complete MVC Solution
+  packageVersion: 1.0
+  assetPath: Assets/LevelMapModule/LevelMapModule.asmdef
+  uploadId: 766588

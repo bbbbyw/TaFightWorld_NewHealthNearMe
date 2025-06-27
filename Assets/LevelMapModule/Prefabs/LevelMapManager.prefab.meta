@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 8513a64ced1536344a8d623f9c133d09
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 322284
+  packageName: Level Map System - Complete MVC Solution
+  packageVersion: 1.0
+  assetPath: Assets/LevelMapModule/Prefabs/LevelMapManager.prefab
+  uploadId: 766588

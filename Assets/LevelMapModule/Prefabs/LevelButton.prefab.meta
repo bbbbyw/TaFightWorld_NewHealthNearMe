@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 2750a64530589564b84047d3daa298ed
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 322284
+  packageName: Level Map System - Complete MVC Solution
+  packageVersion: 1.0
+  assetPath: Assets/LevelMapModule/Prefabs/LevelButton.prefab
+  uploadId: 766588
