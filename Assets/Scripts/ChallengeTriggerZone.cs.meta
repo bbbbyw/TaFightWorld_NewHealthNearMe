@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 5f4fcb0b83a845b46a59e7199aa67b31
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - challengeData: {fileID: 11400000, guid: 65f5df4aa405b6e4da9d04ea7b31a2c8, type: 2}
+  - challengeText: {instanceID: 0}
+  - progressText: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
