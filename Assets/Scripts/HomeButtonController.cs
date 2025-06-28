@@ -12,6 +12,6 @@ public class HomeButtonController : MonoBehaviour
             poseGameManager.ForceStop();
         }
 
-        SceneManager.LoadScene("MainMenuScene");
+        SceneManager.LoadScene("Homepage");
     }
 }
