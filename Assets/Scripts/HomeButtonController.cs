@@ -5,6 +5,6 @@ public class HomeButtonController : MonoBehaviour
 {
     public void GoHome()
     {
-        SceneManager.LoadScene("MainMenuScene");
+        SceneManager.LoadScene("็Homepage");
     }
 }
