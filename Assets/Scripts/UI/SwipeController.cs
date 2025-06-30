@@ -30,7 +30,8 @@ public class SwipeController : MonoBehaviour
 
     public void Previous()
     {
-        if(currentPage > 1)
+        Debug.Log("previous button clicked");
+        if (currentPage > 1)
         {
             currentPage--;
             targetPos -= pageStep;
@@ -40,7 +41,7 @@ public class SwipeController : MonoBehaviour
 
     void MovePage()
     {
-        LeanTween.moveLocal(stagePageRect.gameObject,targetPos, tweenTime).setEase(tweenType);
+        stagePageRect.LeanMoveLocal(targetPos, tweenTime).setEase(tweenType);
     }
 
 }
