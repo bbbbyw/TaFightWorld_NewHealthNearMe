@@ -1766,7 +1766,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 920149499}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2090814734}
+        m_TargetAssemblyTypeName: Changscene, Assembly-CSharp
+        m_MethodName: GotoHomepage
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &920149499
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3393,6 +3405,7 @@ GameObject:
   - component: {fileID: 2090814732}
   - component: {fileID: 2090814731}
   - component: {fileID: 2090814730}
+  - component: {fileID: 2090814734}
   m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
@@ -3551,6 +3564,18 @@ Canvas:
   m_SortingLayerID: -1158468111
   m_SortingOrder: 3
   m_TargetDisplay: 0
+--- !u!114 &2090814734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2090814728}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67708a1d983bc3a4ea1eedbce7dceddd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
