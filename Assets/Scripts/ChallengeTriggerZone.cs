@@ -34,13 +34,13 @@ public class ChallengeTriggerZone : MonoBehaviour
     public bool IsActive => isActive;
 
     // Private fields
-    private bool isActive = false;
+    protected bool isActive = false;
     private bool isFailed = false;
     private StageManager stageManager;
-    private PlayerController playerController;
-    private Vector3 challengeStartPosition;
+    protected PlayerController playerController;
+    protected Vector3 challengeStartPosition;
 
-    private void Start()
+    protected virtual void Start()
     {
         stageManager = FindAnyObjectByType<StageManager>();
         if (stageManager == null)
@@ -188,7 +188,7 @@ public class ChallengeTriggerZone : MonoBehaviour
         onChallengeStart.Invoke();
     }
 
-    private void UpdateUIPosition()
+    protected void UpdateUIPosition()
     {
         if (worldSpaceCanvas != null && playerController != null)
         {
@@ -222,7 +222,7 @@ public class ChallengeTriggerZone : MonoBehaviour
         }
     }
 
-    public void CompleteChallenge(bool success)
+    public virtual void CompleteChallenge(bool success)
     {
         if (!isActive && !challengeData.challengeType.Equals(ChallengeType.Walk))
         {

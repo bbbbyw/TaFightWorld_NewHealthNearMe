@@ -5,6 +5,8 @@ namespace Core
         None,
         Walk,
         Jump,
-        TwistBody
+        TwistBody,
+        DogChaseRun,    // สำหรับวิ่งหนีหมา
+        DogChaseClimb   // สำหรับปีนต้นไม้
     }
 } 
