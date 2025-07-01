@@ -30,7 +30,6 @@ public class SwipeController : MonoBehaviour
 
     public void Previous()
     {
-        Debug.Log("previous button clicked");
         if (currentPage > 1)
         {
             currentPage--;
