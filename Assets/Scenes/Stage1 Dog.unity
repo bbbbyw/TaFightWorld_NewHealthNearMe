@@ -359,6 +359,8 @@ MonoBehaviour:
   dogStartDistance: 5
   dogMinDistance: 1
   dogSpeed: 1
+  attemptTextObject: {fileID: 2180288807116056980}
+  failIndicator: {fileID: 4141241070173463257, guid: 10e0cb01475360040a7c344d364044f7, type: 3}
 --- !u!4 &103957326
 Transform:
   m_ObjectHideFlags: 0
@@ -437,12 +439,13 @@ MonoBehaviour:
   dog: {fileID: 1157282408}
   dogStartDistance: 5
   treeClimbPoint: {fileID: 1653953080}
+  dogChaseSpeed: 3
+  dogClimbSpeed: 3
   climbHeight: 3.5
   climbSpeed: 2
   stageType: 5
   runCharacter: {fileID: 596992568}
   climbCharacter: {fileID: 1121792847}
-  attemptsText: {fileID: 2646212367016916290}
 --- !u!1 &115503297
 GameObject:
   m_ObjectHideFlags: 0
@@ -514,6 +517,8 @@ MonoBehaviour:
   dogStartDistance: 5
   dogMinDistance: 1
   dogSpeed: 2
+  attemptTextObject: {fileID: 2180288807116056980}
+  failIndicator: {fileID: 4141241070173463257, guid: 77b80ddb46991b44c9948c4ab1c2d800, type: 3}
 --- !u!114 &115503300
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -531,12 +536,13 @@ MonoBehaviour:
   dog: {fileID: 3943141373287303925}
   dogStartDistance: 5
   treeClimbPoint: {fileID: 0}
+  dogChaseSpeed: 5
+  dogClimbSpeed: 3
   climbHeight: 5
   climbSpeed: 2
   stageType: 4
   runCharacter: {fileID: 596992568}
   climbCharacter: {fileID: 1121792847}
-  attemptsText: {fileID: 2646212367016916290}
 --- !u!61 &115503301
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -670,6 +676,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &154551486 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8655138842118434514, guid: 7433184919792d94cb4e82a9a157af96, type: 3}
+  m_PrefabInstance: {fileID: 367012351}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &203373708
 GameObject:
   m_ObjectHideFlags: 0
@@ -707,6 +718,11 @@ MonoBehaviour:
     stageController: {fileID: 103957328}
     challenge: {fileID: 103957325}
   transitionDelay: 6
+  maxTotalAttempts: 3
+  gameOverPanel: {fileID: 72584555}
+  successPanel: {fileID: 154551486}
+  restartButton: {fileID: 1564209637}
+  continueButton: {fileID: 430839579}
   currentStageIndex: 0
 --- !u!4 &203373710
 Transform:
@@ -917,6 +933,17 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &430839579 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8658221350903809136, guid: 7433184919792d94cb4e82a9a157af96, type: 3}
+  m_PrefabInstance: {fileID: 367012351}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &439777895
 GameObject:
   m_ObjectHideFlags: 0
@@ -1110,8 +1137,8 @@ Transform:
   m_GameObject: {fileID: 596992568}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.26255, y: -0.9573401, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -0.25, y: -0.74, z: 0}
+  m_LocalScale: {x: 1.1909, y: 1.1909, z: 1.1909}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1679791696}
@@ -3150,13 +3177,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1121792847}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 11.92417, y: -10.94748, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: -0.0012828732, w: 0.99999917}
+  m_LocalPosition: {x: 11.87589, y: -10.16744, z: 0}
   m_LocalScale: {x: 0.55409014, y: 0.55409014, z: 0.55409014}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 319439549}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -0.147}
 --- !u!61 &1121792851
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3239,6 +3266,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1131630791}
+  - component: {fileID: 1131630792}
   m_Layer: 0
   m_Name: ExitPoint
   m_TagString: Untagged
@@ -3261,6 +3289,52 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1679791696}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &1131630792
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1131630790}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!1 &1131738855
 GameObject:
   m_ObjectHideFlags: 0
@@ -3425,8 +3499,8 @@ Transform:
   m_GameObject: {fileID: 1157282408}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.29672003, y: -11.46, z: 0}
-  m_LocalScale: {x: 0.8571, y: 0.8571, z: 0.8571}
+  m_LocalPosition: {x: -0.0038, y: -11.6431, z: 0}
+  m_LocalScale: {x: 0.67933744, y: 0.67933744, z: 0.67933744}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 319439549}
@@ -5601,6 +5675,7 @@ MonoBehaviour:
   attemptsText: {fileID: 2646212367016916290}
   failPanel: {fileID: 87031387}
   retryButton: {fileID: 1564209637}
+  stageController: {fileID: 0}
 --- !u!1 &23939628805374536
 GameObject:
   m_ObjectHideFlags: 0
@@ -6536,8 +6611,8 @@ Transform:
   m_GameObject: {fileID: 3943141373287303925}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.57, y: -1.16, z: 0}
-  m_LocalScale: {x: 0.8571, y: 0.8571, z: 0.8571}
+  m_LocalPosition: {x: -5.8381, y: -1.3234, z: 0}
+  m_LocalScale: {x: 0.69845104, y: 0.69845104, z: 0.69845104}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1679791696}
@@ -7186,6 +7261,7 @@ MonoBehaviour:
   attemptsText: {fileID: 2646212367016916290}
   failPanel: {fileID: 87031387}
   retryButton: {fileID: 1564209637}
+  stageController: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
