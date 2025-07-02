@@ -5,21 +5,16 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using UnityEngine.Video;
-public enum PosePlayMode
-{
-    AutoFinish,
-    RealtimeOnly
-}
 
 public class PoseGameManager : MonoBehaviour
 {
+    public static PoseGameManager Instance { get; private set; }
+
     [Header("Detection & Logic")]
     public PoseLandmarkerLive detector;
     public PoseLogic logic;
     public GameObject CameraPreview;
-
-    [Header("Settings")]
-    public PoseGameConfig config;
+    private List<PoseRequirement> poseList; 
 
     [Header("UI References")]
     public GameObject poseIntroPanel;
@@ -58,20 +53,21 @@ public class PoseGameManager : MonoBehaviour
     public Sprite failIcon;
 
     [Header("Audio")]
-    private AudioSource audioSource;
+    public AudioSource poseAudioSource;
     public AudioClip introSound;
     public AudioClip successSound;
     public AudioClip failSound;
     private bool isHoldSFXPlaying = false;
 
     // State
+    private PoseRequirement currentPose;
     public float countCooldown = 0.3f;
     private int currentPoseIndex = 0;
-    private PoseRequirement currentPose;
     private float timeRemaining;
     private float holdTimer = 0f;
     private int counter = 0;
     private float lastCountTime = 0f;
+    public bool autoStartPose = false;
     private bool isPoseActive = false;
     private string lastUIText = "";
     private bool isPaused = false;
@@ -80,52 +76,62 @@ public class PoseGameManager : MonoBehaviour
     private Coroutine poseTimerCoroutine;
 
     // Callbacks
-    private Action<bool> externalCallback; // สำหรับส่ง success/fail ตอนจบทั้งหมด
-    public Action onSinglePoseCounted;    // เรียกทุกครั้งที่นับเพิ่ม 1 count (Realtime Count mode)
+    private ChallengeTriggerZone currentChallengeTriggerZone;
+    private Action<bool> externalCallback; // For sending success/fail at all endings
+    public Action onSinglePoseCounted;    // Call every time the count increments by 1 (Realtime Count mode)
     private bool enableSingleCountCallback = false;
     private bool forceRealtimeCountingOnly = false;
     private bool externalModeActive = false;
     private bool finalSuccess = true;
     public int CurrentCount => counter;
-    public event System.Action<int> OnPoseStageAdvanced;    
+    public event System.Action<int> OnPoseStageAdvanced;
+
     void Start()
     {
-        if (config == null || config.PosesInScene == null || config.PosesInScene.Count == 0)
-        {
-            Debug.LogError("❌ No poses configured in PoseGameConfig");
-            return;
-        }
+        Debug.Log($"PoseGameManager instances: {FindObjectsOfType<PoseGameManager>().Length}");
 
-        CameraPreview?.SetActive(true);
+        CameraPreview?.SetActive(false);
         poseIntroPanel?.SetActive(false);
         resultPanel?.SetActive(false);
         uiText?.gameObject.SetActive(false);
         poseIconUI?.gameObject.SetActive(false);
         poseIconImage?.gameObject.SetActive(false);
-        howToButton?.gameObject.SetActive(false);
-        closeVideoButton.gameObject.SetActive(false);
         pauseButton?.gameObject.SetActive(false);
-        continueButton?.gameObject.SetActive(false);
+
         blackFilter?.gameObject.SetActive(false);
 
+        howToButton?.gameObject.SetActive(false);
         howToVideoRawImage?.gameObject.SetActive(false);
         videoPlayer.Stop();
+        videoPlayer.clip = null;
         videoPlayer.gameObject.SetActive(false);
+        Debug.Log("✅ VideoPlayer force stopped and hidden");
         videoPlayer.playOnAwake = false;
+        closeVideoButton.gameObject.SetActive(false);
 
-        isPaused = false;
-        isPoseActive = true;
-        detector.SetPaused(false);
-        detector.OnLandmarksUpdated += OnLandmarksDetected;
-
-        audioSource = GetComponent<AudioSource>();
-        if (audioSource == null)
-            audioSource = gameObject.AddComponent<AudioSource>();
-
-        StartNextPose();
+        isPaused = true;
+        isPoseActive = false;
+        detector.SetPaused(true);
+        
+        if (autoStartPose && poseList != null && poseList.Count > 0)
+        {
+            externalModeActive = true;
+            currentPoseIndex = 0;
+            StartNextPose();
+        }
     }
 
-    void ResetPoseState()
+    void Awake()
+    {
+        Instance = this;
+
+        resultPanel.SetActive(false);
+        continueButton?.gameObject.SetActive(false);
+        pauseVideoButton?.gameObject.SetActive(false);
+        playVideoButton?.gameObject.SetActive(false);
+    }
+
+    public void ResetPoseState()
     {
         timeRemaining = 0f;
         holdTimer = 0f;
@@ -146,43 +152,130 @@ public class PoseGameManager : MonoBehaviour
 
     void StartNextPose()
     {
+        Debug.Log($"Start Next Pose!");
         ResetPoseState();
 
-        if (currentPoseIndex >= config.PosesInScene.Count)
+        if (poseList == null || poseList.Count == 0)
         {
-            // จบชุดท่า
+            Debug.LogError("❌ poseList is NULL or EMPTY in StartNextPose!");
+            return;
+        }
+
+        if (currentPoseIndex >= poseList.Count)
+        {
+            Debug.Log("✅ All poses done. Calling callback if in external mode.");
             isPoseActive = false;
             detector.SetPaused(true);
-            CameraPreview?.SetActive(false);
 
             if (externalModeActive)
             {
                 externalCallback?.Invoke(finalSuccess);
                 externalCallback = null;
                 externalModeActive = false;
-                gameObject.SetActive(false);
             }
-
             return;
+        }
+
+        currentPose = poseList[currentPoseIndex];
+
+        if (currentPose == null)
+        {
+            Debug.LogError($"❌ Pose at index {currentPoseIndex} is NULL!");
+            return;
+        }
+
+        Debug.Log($"📌 Starting pose: {currentPose.PoseName} | Icon: {(currentPose.PoseIcon != null ? "OK" : "MISSING")}");
+
+        if (poseIconImage != null && currentPose.PoseIcon != null)
+        {
+            poseIconImage.sprite = currentPose.PoseIcon;
+            poseIconImage.preserveAspect = true;
+        }
+        else
+        {
+            Debug.LogWarning("⚠️ poseIconImage or currentPose.PoseIcon isNULL");
+        }
+
+        if (poseThaiName != null)
+        {
+            poseThaiName.text = currentPose.PoseNameThai ?? "Unnamed Pose";
         }
 
         Debug.Log($"StartNextPose: Invoking OnPoseStageAdvanced with index {currentPoseIndex}");
         OnPoseStageAdvanced?.Invoke(currentPoseIndex);
 
-        currentPose = config.PosesInScene[currentPoseIndex];
+        if (poseList == null || poseList.Count == 0 || currentPoseIndex >= poseList.Count)
+        {
+            Debug.LogError("❌ Cannot start pose: poseList is null/empty or index out of range.");
+            return;
+        }
+        
+        currentPose = poseList[currentPoseIndex];
         timeRemaining = currentPose.TimeLimit;
-
         holdTimer = 0f;
         counter = 0;
-        isPoseActive = false;
-        detector.SetPaused(true);
 
-        poseIntroPanel?.SetActive(true);
-        if (introSound != null)
-            audioSource.PlayOneShot(introSound);
+        if (poseAudioSource != null && introSound != null)
+        {
+            poseAudioSource.PlayOneShot(introSound);
+        }
+        else
+        {
+            Debug.LogWarning("[AUDIO] poseAudioSource OR introSound is NULL");
+        }
+        
+        Debug.Log($"[StartNextPose] currentPoseIndex={currentPoseIndex}, poseListCount={poseList?.Count}");
+        Debug.Log($"[StartNextPose] currentPose={currentPose}, poseIconImage={poseIconImage}, poseIcon={currentPose?.PoseIcon}");
 
-        CameraPreview?.SetActive(false);
+        try
+        {
+            if (poseIconImage != null && currentPose != null && currentPose.PoseIcon != null)
+            {
+                poseIconImage.sprite = currentPose.PoseIcon;
+                poseIconImage.preserveAspect = true;
+                poseIconUI.sprite = currentPose.PoseIcon;
+                poseIconUI.preserveAspect = true;
+            }
+            else
+            {
+                Debug.LogError("❌ One of the required components is null during sprite assignment");
+                Debug.Log($"poseIconImage: {(poseIconImage != null ? "✅" : "❌")}, " +
+                        $"currentPose: {(currentPose != null ? "✅" : "❌")}, " +
+                        $"PoseIcon: {(currentPose?.PoseIcon != null ? "✅" : "❌")}");
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError($"🔥 Exception while setting pose icon: {ex}");
+        }
+
+        if (introStatusIcon != null && hourglassIcon != null)
+        {
+            introStatusIcon.gameObject.SetActive(true); 
+            introStatusIcon.sprite = hourglassIcon;
+        }
+
+        if (poseThaiName != null && currentPose.PoseNameThai != null)
+            poseThaiName.text = currentPose.PoseNameThai;
+        else
+            Debug.LogWarning("⚠️ poseThaiName or currentPose.PoseNameThai is null");
+
+        if (countText != null)
+        {
+            countText.text = currentPose.Type == PoseType.Counting
+                ? $"จำนวนครั้ง: {currentPose.CountRequired}"
+                : $"ค้างท่า: {currentPose.DurationRequired:0.0} วินาที";
+        }
+        else
+        {
+            Debug.LogWarning("⚠️ countText is null");
+        }
+
         poseIconUI?.gameObject.SetActive(true);
+        poseIntroPanel?.SetActive(true);
+        Debug.Log($"[DEBUG] poseIntroPanel activeSelf = {poseIntroPanel?.activeSelf}");
+    
+        CameraPreview?.SetActive(false);
         uiText?.gameObject.SetActive(false);
         retryButton?.gameObject.SetActive(false);
         poseIconImage?.gameObject.SetActive(false);
@@ -191,45 +284,30 @@ public class PoseGameManager : MonoBehaviour
         pauseButton?.gameObject.SetActive(false);
         blackFilter?.gameObject.SetActive(false);
 
-        if (poseIconUI != null)
-        {
-            poseIconUI.sprite = currentPose.PoseIcon;
-            poseIconUI.preserveAspect = true;
-        }
-        if (introStatusIcon != null && hourglassIcon != null) introStatusIcon.sprite = hourglassIcon;
-        if (poseThaiName != null) poseThaiName.text = currentPose.PoseNameThai;
-
-        if (countText != null)
-        {
-            countText.text = currentPose.Type == PoseType.Counting  
-                ? $"จำนวนครั้ง: {currentPose.CountRequired}"
-                : $"ค้างท่า: {currentPose.DurationRequired:0.0} วินาที";
-        }
-
         Invoke(nameof(BeginPoseDetection), introDelay);
     }
 
     void BeginPoseDetection()
     {
+        Debug.Log("[DEBUG] BeginPoseDetection called");
         poseIntroPanel?.SetActive(false);
         poseIconUI?.gameObject.SetActive(false);
         CameraPreview?.SetActive(true);
         uiText?.gameObject.SetActive(true);
-        poseIconImage?.gameObject.SetActive(true);
-        howToButton?.gameObject.SetActive(true);
-        closeVideoButton.gameObject.SetActive(false);
-        pauseButton?.gameObject.SetActive(true);
-        continueButton?.gameObject.SetActive(false);
-        blackFilter?.gameObject.SetActive(false);
-
-        if (poseIconImage != null)
+        if (poseIconImage != null && currentPose != null && currentPose.PoseIcon != null)
         {
-            poseIconImage.sprite = currentPose.PoseIcon;
+            poseIconImage.sprite = currentPose.PoseIcon;    
             poseIconImage.preserveAspect = true;
         }
+        poseIconImage?.gameObject.SetActive(true);
+        howToButton?.gameObject.SetActive(true);
+        pauseButton?.gameObject.SetActive(true);
+        continueButton?.gameObject.SetActive(false);
 
+        isPaused = false;
         isPoseActive = true;
         detector.SetPaused(false);
+        detector.OnLandmarksUpdated += OnLandmarksDetected;
         lastUIText = "";
 
         if (poseTimerCoroutine != null) StopCoroutine(poseTimerCoroutine);
@@ -238,8 +316,10 @@ public class PoseGameManager : MonoBehaviour
 
     IEnumerator PoseTimeLimit()
     {
+        Debug.Log("[DEBUG] PoseTimeLimit started");
         while (timeRemaining > 0f)
         {
+            //Debug.Log($"⏳ timeRemaining: {timeRemaining}, isPaused={isPaused}");
             if (!isPaused)
             {
                 timeRemaining -= Time.deltaTime;
@@ -258,20 +338,22 @@ public class PoseGameManager : MonoBehaviour
                 yield break;
             }
         }
-
+        Debug.Log("[DEBUG] PoseTimeLimit ended");
         PoseCompleted(false);
     }
     void PoseCompleted(bool success)
     {
+        Debug.Log($"Pose Completed!");
+
         isPoseActive = false;
         if (poseTimerCoroutine != null) StopCoroutine(poseTimerCoroutine);
         detector.SetPaused(true);
 
-        if (isHoldSFXPlaying && audioSource.clip == currentPose.HoldSFX)
+        if (isHoldSFXPlaying && poseAudioSource.clip == currentPose.HoldSFX)
         {
-            audioSource.Stop();
-            audioSource.clip = null;
-            audioSource.loop = false;
+            poseAudioSource.Stop();
+            poseAudioSource.clip = null;
+            poseAudioSource.loop = false;
             isHoldSFXPlaying = false;
         }
 
@@ -313,7 +395,7 @@ public class PoseGameManager : MonoBehaviour
         if (success)
         {
             if (successSound != null)
-                audioSource.PlayOneShot(successSound);
+                poseAudioSource.PlayOneShot(successSound);
             retryButton?.gameObject.SetActive(false);
             currentPoseIndex++;
 
@@ -321,33 +403,52 @@ public class PoseGameManager : MonoBehaviour
         }
         else
         {
-            if (failSound != null)
-                audioSource.PlayOneShot(failSound);
             retryButton?.gameObject.SetActive(true);
+
+            if (failSound != null)
+                poseAudioSource.PlayOneShot(failSound);
+
+            if (externalModeActive && externalCallback != null)
+            {
+                Debug.Log("🔁 Notifying external system of pose failure");
+                externalCallback.Invoke(false);
+
+                return;
+            }
         }
     }
 
     public void RetryCurrentPose()
     {
-        resultPanel?.SetActive(false);
-        retryButton?.gameObject.SetActive(false);
-        poseIconUI?.gameObject.SetActive(true);
-        poseIconImage?.gameObject.SetActive(false);
-        blackFilter?.gameObject.SetActive(false);
-
+        Debug.Log("Retry!");
         RestartCurrentPose();
+
+        if (currentChallengeTriggerZone != null)
+        {
+            Debug.Log("[PoseGameManager] Restarting challenge in currentChallengeTriggerZone");
+            currentChallengeTriggerZone.RestartChallenge();
+        }
+        else
+        {
+            Debug.LogWarning("[PoseGameManager] currentChallengeTriggerZone is null, cannot restart challenge");
+        }
     }
 
     void RestartCurrentPose()
     {
+        Debug.Log($"Restart Current Pose!");
         timeRemaining = currentPose.TimeLimit;
         holdTimer = 0f;
         counter = 0;
         isPoseActive = false;
 
+        resultPanel?.SetActive(false);
+        retryButton?.gameObject.SetActive(false);
+        blackFilter?.gameObject.SetActive(false);
+
         poseIntroPanel?.SetActive(true);
         if (introSound != null)
-            audioSource.PlayOneShot(introSound);
+            poseAudioSource.PlayOneShot(introSound);
 
         poseIconUI?.gameObject.SetActive(true);
         uiText?.gameObject.SetActive(false);
@@ -393,7 +494,7 @@ public class PoseGameManager : MonoBehaviour
         poseIconImage?.gameObject.SetActive(false);
         blackFilter?.gameObject.SetActive(false);
 
-        if (currentPoseIndex >= config.PosesInScene.Count)
+        if (currentPoseIndex >= poseList.Count)
         {
             isPoseActive = false;
             detector.SetPaused(true);
@@ -404,7 +505,6 @@ public class PoseGameManager : MonoBehaviour
                 externalCallback?.Invoke(finalSuccess);
                 externalCallback = null;
                 externalModeActive = false;
-                gameObject.SetActive(false);
             }
 
             return;
@@ -415,8 +515,10 @@ public class PoseGameManager : MonoBehaviour
 
     void OnLandmarksDetected(List<Vector3> landmarks)
     {
-        if (!isPoseActive || currentPose == null || logic == null || landmarks == null)
+        if (!isPoseActive || currentPose == null || logic == null || landmarks == null) {
+            Debug.Log($"Skip detection. isPoseActive={isPoseActive}, currentPose={currentPose}, logic={logic}, landmarks={landmarks}");
             return;
+        }
 
         bool detected = logic.IsPoseDetected(currentPose.PoseName, landmarks);
         int displayTime = Mathf.CeilToInt(timeRemaining);
@@ -429,19 +531,19 @@ public class PoseGameManager : MonoBehaviour
 
                 if (!isHoldSFXPlaying && currentPose.HoldSFX != null)
                 {
-                    audioSource.clip = currentPose.HoldSFX;
-                    audioSource.loop = true;
-                    audioSource.Play();
+                    poseAudioSource.clip = currentPose.HoldSFX;
+                    poseAudioSource.loop = true;
+                    poseAudioSource.Play();
                     isHoldSFXPlaying = true;
                 }
             }
             else
             {
-                if (isHoldSFXPlaying && audioSource.clip == currentPose.HoldSFX)
+                if (isHoldSFXPlaying && poseAudioSource.clip == currentPose.HoldSFX)
                 {
-                    audioSource.Stop();
-                    audioSource.clip = null;
-                    audioSource.loop = false;
+                    poseAudioSource.Stop();
+                    poseAudioSource.clip = null;
+                    poseAudioSource.loop = false;
                     isHoldSFXPlaying = false;
                 }
             }
@@ -465,7 +567,7 @@ public class PoseGameManager : MonoBehaviour
                 lastCountTime = Time.time;
 
                 if (currentPose.CountSFX != null)
-                    audioSource.PlayOneShot(currentPose.CountSFX);
+                    poseAudioSource.PlayOneShot(currentPose.CountSFX);
 
                 Debug.Log($"✅ Counted! total = {counter}");
                 if (enableSingleCountCallback && onSinglePoseCounted != null)
@@ -483,32 +585,36 @@ public class PoseGameManager : MonoBehaviour
         }
     }
 
-    // เรียกเล่นชุดท่าที่ต้องการ แล้ว callback เมื่อสำเร็จ/ล้มเหลว
+    // Call to play the desired set of moves and callback when successful/failed.
     public void PlayPoseExternal(List<PoseRequirement> poses, Action<bool> callback)
     {
-        config = ScriptableObject.CreateInstance<PoseGameConfig>();
-        config.PosesInScene = poses;
-        currentPoseIndex = 0;
+        if (poses == null || poses.Count == 0)
+        {
+            Debug.LogError("❌ PlayPoseExternal called with NULL or EMPTY poses list");
+            return;
+        }
+
+        poseList = poses.FindAll(p => p != null); 
+        if (poseList.Count == 0)
+        {
+            Debug.LogError("❌ All PoseRequirements are NULL!");
+            return;
+        }
 
         externalCallback = callback;
         externalModeActive = true;
+        currentPoseIndex = 0;
         finalSuccess = true;
 
-        enableSingleCountCallback = true; 
+        Debug.Log($"✅ PlayPoseExternal: {poseList.Count} poses loaded. Starting...");
+
         StartNextPose();
     }
-    
-    // เล่น pose เดี่ยวในโหมด realtime count (นับครั้งแล้ว callback ทุกครั้ง)
+
+    // Play a single pose in realtime count mode (counts times and calls back every time)
     public void PlaySinglePose(PoseRequirement pose, Action onCounted, Action onFinished = null)
-    {
-        Debug.Log($"▶️ Playing pose: {pose.PoseName}");
-
-        StopAllCoroutines();
-        detector.SetPaused(true);
-        isPoseActive = false;
-
-        config = ScriptableObject.CreateInstance<PoseGameConfig>();
-        config.PosesInScene = new List<PoseRequirement> { pose };
+    {   
+        poseList = new List<PoseRequirement> { pose };
         currentPoseIndex = 0;
 
         onSinglePoseCounted = onCounted;
@@ -518,11 +624,8 @@ public class PoseGameManager : MonoBehaviour
         externalModeActive = true;
         finalSuccess = true;
 
-        gameObject.SetActive(true);
         StartNextPose();
     }
-
-    
 
     // ----------------- Pause & Continue Play System -----------------
     public void OnPauseClicked()
@@ -636,6 +739,8 @@ public class PoseGameManager : MonoBehaviour
         closeVideoButton?.gameObject.SetActive(true);
         blackFilter?.gameObject.SetActive(true);
 
+        playVideoButton?.gameObject.SetActive(true);
+
         string videoPath = System.IO.Path.Combine(Application.streamingAssetsPath, currentPose.LocalVideoFileName);
 
 #if UNITY_ANDROID
@@ -662,7 +767,7 @@ public class PoseGameManager : MonoBehaviour
             Debug.Log("⏸️ Video paused.");
         }
         pauseVideoButton?.gameObject.SetActive(false);
-        playVideoButton?.gameObject.SetActive(false);
+        playVideoButton?.gameObject.SetActive(true);
         videoPlayer?.gameObject.SetActive(false);
     }
 
@@ -688,6 +793,8 @@ public class PoseGameManager : MonoBehaviour
         CameraPreview?.SetActive(true);
         closeVideoButton?.gameObject.SetActive(false);
         blackFilter?.gameObject.SetActive(false);
+        playVideoButton?.gameObject.SetActive(false);
+        pauseVideoButton?.gameObject.SetActive(false);
 
         isPaused = false;
         isPoseActive = true;
@@ -702,6 +809,11 @@ public class PoseGameManager : MonoBehaviour
 
         videoPlayer.Play();
         Debug.Log("▶️ Video is now playing.");
+    }
+
+    public void SetCurrentChallengeTriggerZone(ChallengeTriggerZone triggerZone)
+    {
+        currentChallengeTriggerZone = triggerZone;
     }
 
 }

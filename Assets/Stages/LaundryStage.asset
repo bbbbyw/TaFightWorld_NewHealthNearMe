@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 886818c9cdfcc0f41bb4fb38aef1d54a, type: 3}
+  m_Name: LaundryStage
+  m_EditorClassIdentifier: 
+  steps:
+  - actionType: 0
+    challengeText: Bend down for 20 seconds to pick up the clothes
+    additionalHoldTime: 0
+    successKey: 97
+    failKey: 273
+  - actionType: 1
+    challengeText: Twist your body 30 times to dry the clothes
+    additionalHoldTime: 0
+    successKey: 115
+    failKey: 274
+  - actionType: 2
+    challengeText: Jump 15 times to hang the clothes
+    additionalHoldTime: 0
+    successKey: 100
+    failKey: 276
+  maxFailAttempts: 3

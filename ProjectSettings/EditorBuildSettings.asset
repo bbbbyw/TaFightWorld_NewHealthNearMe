@@ -6,13 +6,13 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Homepage.unity
+    path: Assets/Scenes/SampleScene.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
   - enabled: 1
     path: Assets/Scenes/Login.unity
     guid: f6e56d014944c0949b0a8a0c6567ce92
   - enabled: 0
-    path: Assets/Scenes/KnightTrialScene.unity
+    path: Assets/Scenes/Stage/Stage 5 KnightTrialScene.unity
     guid: 5f009f56c658fd84690fe630e1a14857
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}

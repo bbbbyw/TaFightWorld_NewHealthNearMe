@@ -157,10 +157,10 @@ TextureImporter:
       name: Pink_Monster_Attack2_6_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 6
         y: 0
-        width: 32
-        height: 32
+        width: 19
+        height: 29
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -179,10 +179,10 @@ TextureImporter:
       name: Pink_Monster_Attack2_6_1
       rect:
         serializedVersion: 2
-        x: 32
+        x: 37
         y: 0
-        width: 32
-        height: 32
+        width: 19
+        height: 27
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -201,10 +201,10 @@ TextureImporter:
       name: Pink_Monster_Attack2_6_2
       rect:
         serializedVersion: 2
-        x: 64
+        x: 69
         y: 0
-        width: 32
-        height: 32
+        width: 28
+        height: 28
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -223,10 +223,10 @@ TextureImporter:
       name: Pink_Monster_Attack2_6_3
       rect:
         serializedVersion: 2
-        x: 96
+        x: 102
         y: 0
-        width: 32
-        height: 32
+        width: 20
+        height: 27
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -245,10 +245,10 @@ TextureImporter:
       name: Pink_Monster_Attack2_6_4
       rect:
         serializedVersion: 2
-        x: 128
+        x: 135
         y: 0
-        width: 32
-        height: 32
+        width: 24
+        height: 28
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -267,10 +267,10 @@ TextureImporter:
       name: Pink_Monster_Attack2_6_5
       rect:
         serializedVersion: 2
-        x: 160
+        x: 165
         y: 0
-        width: 32
-        height: 32
+        width: 19
+        height: 27
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -289,7 +289,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: b7d2e9f7aa0359d4c96496afd8c74aea
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -297,11 +297,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries:
-      - key: SpriteEditor.SliceSettings
-        value: '{"sliceOnImport":true,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":32.0,"y":32.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
-      - key: SpriteEditor.SliceOnImport
-        value: True
+      entries: []
     nameFileIdTable:
       Pink_Monster_Attack2_6_0: -7482435820125559580
       Pink_Monster_Attack2_6_1: -1981500011118924899

@@ -1,62 +1,73 @@
 using UnityEngine;
+using System.Collections;
 
 [RequireComponent(typeof(BoxCollider2D))]
-[RequireComponent(typeof(ChallengeTriggerZone))]
 public class AutoWalkZone : MonoBehaviour
 {
-    [Header("Movement Settings")]
-    public float moveSpeed = 5f;
-    
-    [Header("Zone Markers")]
-    public WalkZoneMarker beginMarker;
-    public WalkZoneMarker endMarker;
-    
-    [Header("Visual Settings")]
-    public Color zoneColor = new Color(1f, 1f, 0f, 0.2f);  // Semi-transparent yellow
-    public bool showZoneInGame = false;  // Whether to show the zone during gameplay
-    
-    private BoxCollider2D boxCollider;
+    [Header("Auto Walk Settings")]
+    public float autoMoveSpeed = 7f;
+    public float transitionSmoothness = 0.1f; // Lower value = faster transition
+    public float triggerZoneWidth = 2f; // Width of the trigger zone
+    public float triggerZoneHeight = 4f; // Height of the trigger zone
+
+    private Rigidbody2D playerRb;
     private bool isPlayerInZone = false;
-    private Transform playerTransform;
-    private bool isInJumpChallenge = false;
+    private float currentSpeed = 0f;
+    private bool isTransitioning = false;
+    private BoxCollider2D triggerCollider;
+    private bool isExiting = false;
 
-    private void Awake()
+    private void Start()
     {
-        boxCollider = GetComponent<BoxCollider2D>();
-        UpdateZoneSize();
-    }
-
-    private void OnValidate()
-    {
-        UpdateZoneSize();
-    }
-
-    private void UpdateZoneSize()
-    {
-        if (beginMarker == null || endMarker == null) return;
-
-        // Calculate center point between markers
-        Vector3 center = (beginMarker.transform.position + endMarker.transform.position) * 0.5f;
-        transform.position = center;
-
-        // Calculate size based on distance between markers
-        float width = Vector3.Distance(beginMarker.transform.position, endMarker.transform.position);
-        
-        // Update collider size
-        if (boxCollider != null)
+        // Get and setup the trigger collider
+        triggerCollider = GetComponent<BoxCollider2D>();
+        if (triggerCollider != null)
         {
-            boxCollider.size = new Vector2(width, 2f);  // Height is fixed at 2 units
-            boxCollider.isTrigger = true;
+            triggerCollider.isTrigger = true;
+            triggerCollider.size = new Vector2(triggerZoneWidth, triggerZoneHeight);
+            triggerCollider.offset = new Vector2(0, triggerZoneHeight / 4f);
         }
+
+        // Disable the component by default
+        enabled = false;
+    }
+
+    private void OnEnable()
+    {
+        isPlayerInZone = false;
+        isTransitioning = false;
+        isExiting = false;
+        currentSpeed = 0f;
+        playerRb = null;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
+            playerRb = other.GetComponent<Rigidbody2D>();
+            isExiting = false;
             isPlayerInZone = true;
-            playerTransform = other.transform;
-            CheckForJumpChallenge();
+            isTransitioning = true;
+            currentSpeed = playerRb.velocity.x;
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            // Only process if we're not already in the zone and not exiting
+            if (!isPlayerInZone && !isExiting)
+            {
+                isPlayerInZone = true;
+                isTransitioning = true;
+                if (playerRb == null)
+                {
+                    playerRb = other.GetComponent<Rigidbody2D>();
+                    currentSpeed = playerRb.velocity.x;
+                }
+            }
         }
     }
 
@@ -64,86 +75,86 @@ public class AutoWalkZone : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            isPlayerInZone = false;
-            playerTransform = null;
-            isInJumpChallenge = false;
+            StartCoroutine(HandleExit());
         }
     }
 
-    private void CheckForJumpChallenge()
+    private IEnumerator HandleExit()
     {
-        // Use OverlapCircle instead of OverlapCircleNonAlloc
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(playerTransform.position, 1f);
-        foreach (Collider2D collider in colliders)
+        yield return new WaitForFixedUpdate();
+
+        if (playerRb != null)
         {
-            ChallengeTriggerZone challengeZone = collider.GetComponent<ChallengeTriggerZone>();
-            if (challengeZone != null && challengeZone.challengeData.challengeType == ChallengeType.Jump)
+            Collider2D playerCollider = playerRb.GetComponent<Collider2D>();
+            if (playerCollider != null && !triggerCollider.IsTouching(playerCollider))
             {
-                isInJumpChallenge = true;
-                break;
+                isExiting = true;
+                isPlayerInZone = false;
+                StartCoroutine(SmoothExit());
             }
         }
     }
 
-    private void Update()
+    private IEnumerator SmoothExit()
     {
-        if (isPlayerInZone && playerTransform != null && !isInJumpChallenge)
+        float targetSpeed = 0f;
+        float t = 0f;
+
+        while (t < 1f)
         {
-            // Calculate movement direction based on markers
-            Vector3 direction = (endMarker.transform.position - beginMarker.transform.position).normalized;
-            Vector3 movement = direction * moveSpeed * Time.deltaTime;
-            
-            // Move the player
-            playerTransform.position += movement;
+            t += Time.fixedDeltaTime / transitionSmoothness;
+            if (playerRb != null)
+            {
+                float newSpeed = Mathf.Lerp(currentSpeed, targetSpeed, t);
+                playerRb.velocity = new Vector2(newSpeed, playerRb.velocity.y);
+            }
+            yield return new WaitForFixedUpdate();
         }
+
+        // Ensure we reach exactly 0
+        if (playerRb != null)
+        {
+            playerRb.velocity = new Vector2(0f, playerRb.velocity.y);
+        }
+
+        isTransitioning = false;
+        enabled = false;
     }
 
-    private void OnDrawGizmos()
+    private void FixedUpdate()
     {
-        if (!showZoneInGame || beginMarker == null || endMarker == null) return;
+        if (!isPlayerInZone || playerRb == null) return;
 
-        Gizmos.color = zoneColor;
-        
-        // Draw zone area
-        if (boxCollider != null)
+        if (isTransitioning)
         {
-            Gizmos.matrix = transform.localToWorldMatrix;
-            Gizmos.DrawCube(Vector3.zero, new Vector3(boxCollider.size.x, boxCollider.size.y, 0.1f));
+            // Smoothly transition to auto move speed
+            float targetSpeed = autoMoveSpeed;
+            float t = Time.fixedDeltaTime / transitionSmoothness;
+            currentSpeed = Mathf.Lerp(currentSpeed, targetSpeed, t);
+
+            if (Mathf.Abs(currentSpeed - targetSpeed) < 0.01f)
+            {
+                currentSpeed = targetSpeed;
+                isTransitioning = false;
+            }
+        }
+        else
+        {
+            currentSpeed = autoMoveSpeed;
         }
 
-        // Draw path line
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawLine(beginMarker.transform.position, endMarker.transform.position);
-        
-        // Draw direction arrows
-        Vector3 direction = (endMarker.transform.position - beginMarker.transform.position).normalized;
-        float arrowSize = 0.5f;
-        
-        // Draw multiple arrows along the path
-        float pathLength = Vector3.Distance(beginMarker.transform.position, endMarker.transform.position);
-        int numArrows = Mathf.Max(1, Mathf.FloorToInt(pathLength / 2f));
-        
-        for (int i = 0; i < numArrows; i++)
-        {
-            float t = (i + 1) / (float)(numArrows + 1);
-            Vector3 arrowPos = Vector3.Lerp(beginMarker.transform.position, endMarker.transform.position, t);
-            
-            Vector3 right = direction * arrowSize;
-            Vector3 up = Vector3.up * arrowSize;
-            
-            // Draw arrow
-            Gizmos.DrawLine(arrowPos, arrowPos - right + up);
-            Gizmos.DrawLine(arrowPos, arrowPos - right - up);
-        }
+        // Apply movement
+        playerRb.velocity = new Vector2(currentSpeed, playerRb.velocity.y);
     }
 
-    private void Start()
+    public void SetZoneSize(float width, float height)
     {
-        // Get the ChallengeTriggerZone component and set it as an auto-walk zone
-        var challengeTrigger = GetComponent<ChallengeTriggerZone>();
-        if (challengeTrigger != null)
+        triggerZoneWidth = width;
+        triggerZoneHeight = height;
+        if (triggerCollider != null)
         {
-            challengeTrigger.isAutoWalkZone = true;
+            triggerCollider.size = new Vector2(width, height);
+            triggerCollider.offset = new Vector2(0, height / 4f);
         }
     }
 } 

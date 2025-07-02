@@ -1,4 +1,5 @@
 using UnityEngine;
+using Core;
 
 [CreateAssetMenu(fileName = "New Stage", menuName = "TaFightWorld/Stage")]
 public class Stage : ScriptableObject
@@ -9,15 +10,6 @@ public class Stage : ScriptableObject
     public string description = "You see a peaceful garden ahead...";
 
     [Header("Stage Requirements")]
-    public StagePoseType requiredPose = StagePoseType.Walk;
+    public ChallengeType requiredChallenge = ChallengeType.Walk;
     public float completionDelay = 1.5f; // Time before moving to next stage
-}
-
-public enum StagePoseType
-{
-    None,
-    Walk,
-    Jump,
-    Stretch,
-    Nod
 } 

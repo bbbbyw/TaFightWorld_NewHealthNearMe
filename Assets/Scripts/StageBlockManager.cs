@@ -8,7 +8,7 @@ public class StageBlockManager : MonoBehaviour
     [SerializeField] private List<GameObject> randomPool;
     [SerializeField] private float blockWidth = 20f;
     [SerializeField] private bool isShuffleMode;
-    [SerializeField] private float jumpForce = 10f;
+    [SerializeField] private float jumpForce = 17f;
 
     [Header("References")]
     [SerializeField] private Transform prefabSpawnPoint;

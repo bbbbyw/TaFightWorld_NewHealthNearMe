@@ -1,0 +1,738 @@
+fileFormatVersion: 2
+guid: 689381b16f5439646ac1a1bd104071d2
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 8435068372187627555
+    second: GrabAnimation_0
+  - first:
+      213: -6427173789572074627
+    second: GrabAnimation_1
+  - first:
+      213: 5386891066619355541
+    second: GrabAnimation_2
+  - first:
+      213: 8719869640695371546
+    second: GrabAnimation_3
+  - first:
+      213: -2224083610370033744
+    second: GrabAnimation_4
+  - first:
+      213: -8625648516898487806
+    second: GrabAnimation_5
+  - first:
+      213: 235334481756198030
+    second: GrabAnimation_6
+  - first:
+      213: -545893675515573719
+    second: GrabAnimation_7
+  - first:
+      213: -1980277720111694128
+    second: GrabAnimation_8
+  - first:
+      213: -3792241223668166533
+    second: GrabAnimation_9
+  - first:
+      213: -7866971109867528336
+    second: GrabAnimation_10
+  - first:
+      213: 653034778528146606
+    second: GrabAnimation_11
+  - first:
+      213: 657009159306662103
+    second: GrabAnimation_12
+  - first:
+      213: 3460099825219149717
+    second: GrabAnimation_13
+  - first:
+      213: -5774291918836261588
+    second: GrabAnimation_14
+  - first:
+      213: -1388948791376462463
+    second: GrabAnimation_15
+  - first:
+      213: 4430089697050148571
+    second: GrabAnimation_16
+  - first:
+      213: -5419597659057265762
+    second: GrabAnimation_17
+  - first:
+      213: -4684744344371745837
+    second: GrabAnimation_18
+  - first:
+      213: 6219561623378551116
+    second: GrabAnimation_19
+  - first:
+      213: -8765119646833836043
+    second: GrabAnimation_20
+  - first:
+      213: -6092903983588274637
+    second: GrabAnimation_21
+  - first:
+      213: -4464739870199638810
+    second: GrabAnimation_22
+  - first:
+      213: 3460023072495444238
+    second: GrabAnimation_23
+  - first:
+      213: -1563427579693540249
+    second: GrabAnimation_24
+  - first:
+      213: 315381781928387640
+    second: GrabAnimation_25
+  - first:
+      213: 6019296939359968351
+    second: GrabAnimation_26
+  - first:
+      213: -3086995000506036947
+    second: GrabAnimation_27
+  - first:
+      213: 6151013700013214867
+    second: GrabAnimation_28
+  - first:
+      213: 5579143906478652518
+    second: GrabAnimation_29
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 16384
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: GrabAnimation_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 1213
+        height: 1340
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 320406c5ef16f0570800000000000000
+      internalID: 8435068372187627555
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GrabAnimation_1
+      rect:
+        serializedVersion: 2
+        x: 1268
+        y: 0
+        width: 1213
+        height: 1340
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d73fad2bd771ec6a0800000000000000
+      internalID: -6427173789572074627
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GrabAnimation_2
+      rect:
+        serializedVersion: 2
+        x: 2537
+        y: 0
+        width: 1213
+        height: 1340
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 591629552e412ca40800000000000000
+      internalID: 5386891066619355541
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GrabAnimation_3
+      rect:
+        serializedVersion: 2
+        x: 3807
+        y: 0
+        width: 1213
+        height: 1340
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a175c550d33330970800000000000000
+      internalID: 8719869640695371546
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GrabAnimation_4
+      rect:
+        serializedVersion: 2
+        x: 5076
+        y: 0
+        width: 1213
+        height: 1340
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0b730257db77221e0800000000000000
+      internalID: -2224083610370033744
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GrabAnimation_6
+      rect:
+        serializedVersion: 2
+        x: 6345
+        y: 0
+        width: 1213
+        height: 1340
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e849a7cd673144300800000000000000
+      internalID: 235334481756198030
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GrabAnimation_8
+      rect:
+        serializedVersion: 2
+        x: 7615
+        y: 0
+        width: 1213
+        height: 1340
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0de3f10d7e3a484e0800000000000000
+      internalID: -1980277720111694128
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GrabAnimation_9
+      rect:
+        serializedVersion: 2
+        x: 8884
+        y: 0
+        width: 1213
+        height: 1340
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b709aa003b04f5bc0800000000000000
+      internalID: -3792241223668166533
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GrabAnimation_10
+      rect:
+        serializedVersion: 2
+        x: 10152
+        y: 0
+        width: 1213
+        height: 1340
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 07fd512e477e2d290800000000000000
+      internalID: -7866971109867528336
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GrabAnimation_11
+      rect:
+        serializedVersion: 2
+        x: 11422
+        y: 0
+        width: 1213
+        height: 1340
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ea46520dbab001900800000000000000
+      internalID: 653034778528146606
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GrabAnimation_13
+      rect:
+        serializedVersion: 2
+        x: 12690
+        y: 0
+        width: 1213
+        height: 1340
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 59f1499657eb40030800000000000000
+      internalID: 3460099825219149717
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GrabAnimation_15
+      rect:
+        serializedVersion: 2
+        x: 13961
+        y: 0
+        width: 1213
+        height: 1340
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 18d3cc6ee6679bce0800000000000000
+      internalID: -1388948791376462463
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GrabAnimation_16
+      rect:
+        serializedVersion: 2
+        x: 15230
+        y: 0
+        width: 1213
+        height: 1340
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bdebacb9b17da7d30800000000000000
+      internalID: 4430089697050148571
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GrabAnimation_17
+      rect:
+        serializedVersion: 2
+        x: 16499
+        y: 0
+        width: 1213
+        height: 1340
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e936a52b4a8b9c4b0800000000000000
+      internalID: -5419597659057265762
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GrabAnimation_18
+      rect:
+        serializedVersion: 2
+        x: 17768
+        y: 0
+        width: 1213
+        height: 1340
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3dba332f6d17cfeb0800000000000000
+      internalID: -4684744344371745837
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GrabAnimation_20
+      rect:
+        serializedVersion: 2
+        x: 19038
+        y: 0
+        width: 1213
+        height: 1340
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5fffbacee1a0c5680800000000000000
+      internalID: -8765119646833836043
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GrabAnimation_22
+      rect:
+        serializedVersion: 2
+        x: 20307
+        y: 0
+        width: 1213
+        height: 1340
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6e41a364ebe0a02c0800000000000000
+      internalID: -4464739870199638810
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GrabAnimation_23
+      rect:
+        serializedVersion: 2
+        x: 21576
+        y: 0
+        width: 1213
+        height: 1340
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e012fb607a8740030800000000000000
+      internalID: 3460023072495444238
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GrabAnimation_24
+      rect:
+        serializedVersion: 2
+        x: 22846
+        y: 0
+        width: 1213
+        height: 1340
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 76c515056e69d4ae0800000000000000
+      internalID: -1563427579693540249
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GrabAnimation_25
+      rect:
+        serializedVersion: 2
+        x: 24115
+        y: 0
+        width: 1213
+        height: 1340
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 834a8784f06706400800000000000000
+      internalID: 315381781928387640
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GrabAnimation_27
+      rect:
+        serializedVersion: 2
+        x: 25384
+        y: 0
+        width: 1213
+        height: 1340
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d2d4e63176ac825d0800000000000000
+      internalID: -3086995000506036947
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: f19d45b9a74eaf241a8fa54f5ea802e5
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      GrabAnimation_0: 8435068372187627555
+      GrabAnimation_1: -6427173789572074627
+      GrabAnimation_10: -7866971109867528336
+      GrabAnimation_11: 653034778528146606
+      GrabAnimation_12: 657009159306662103
+      GrabAnimation_13: 3460099825219149717
+      GrabAnimation_14: -5774291918836261588
+      GrabAnimation_15: -1388948791376462463
+      GrabAnimation_16: 4430089697050148571
+      GrabAnimation_17: -5419597659057265762
+      GrabAnimation_18: -4684744344371745837
+      GrabAnimation_19: 6219561623378551116
+      GrabAnimation_2: 5386891066619355541
+      GrabAnimation_20: -8765119646833836043
+      GrabAnimation_21: -6092903983588274637
+      GrabAnimation_22: -4464739870199638810
+      GrabAnimation_23: 3460023072495444238
+      GrabAnimation_24: -1563427579693540249
+      GrabAnimation_25: 315381781928387640
+      GrabAnimation_26: 6019296939359968351
+      GrabAnimation_27: -3086995000506036947
+      GrabAnimation_28: 6151013700013214867
+      GrabAnimation_29: 5579143906478652518
+      GrabAnimation_3: 8719869640695371546
+      GrabAnimation_4: -2224083610370033744
+      GrabAnimation_5: -8625648516898487806
+      GrabAnimation_6: 235334481756198030
+      GrabAnimation_7: -545893675515573719
+      GrabAnimation_8: -1980277720111694128
+      GrabAnimation_9: -3792241223668166533
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -16,7 +16,7 @@ MonoBehaviour:
   PoseNameThai: "\u0E27\u0E34\u0E48\u0E07"
   PoseIcon: {fileID: 21300000, guid: 467556cd35e0e54469fd9b974b3190fb, type: 3}
   Type: 0
-  DurationRequired: 30
+  DurationRequired: 2
   CountRequired: 0
   TimeLimit: 60
   LocalVideoFileName: HowToJump.mp4

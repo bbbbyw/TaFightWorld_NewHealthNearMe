@@ -1,0 +1,744 @@
+fileFormatVersion: 2
+guid: 0b2d145587e90b24ca3dd2c4da10bc7d
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -8386943667098526897
+    second: TwistingAnimation_0
+  - first:
+      213: -782567104557256024
+    second: TwistingAnimation_1
+  - first:
+      213: -4247625042201871498
+    second: TwistingAnimation_2
+  - first:
+      213: -4767697050448159863
+    second: TwistingAnimation_3
+  - first:
+      213: 636031652203717861
+    second: TwistingAnimation_4
+  - first:
+      213: 5384834889211884187
+    second: TwistingAnimation_5
+  - first:
+      213: 6760619206264218668
+    second: TwistingAnimation_6
+  - first:
+      213: 4652592824806818884
+    second: TwistingAnimation_7
+  - first:
+      213: -5701293267029299533
+    second: TwistingAnimation_8
+  - first:
+      213: 1488456114889014240
+    second: TwistingAnimation_9
+  - first:
+      213: -4710207206137515955
+    second: TwistingAnimation_10
+  - first:
+      213: -3951999620626396047
+    second: TwistingAnimation_11
+  - first:
+      213: 7967726833604085653
+    second: TwistingAnimation_12
+  - first:
+      213: -3407580522018321685
+    second: TwistingAnimation_13
+  - first:
+      213: 2112879550222260687
+    second: TwistingAnimation_14
+  - first:
+      213: 8468555122635629278
+    second: TwistingAnimation_15
+  - first:
+      213: -3142446257782998942
+    second: TwistingAnimation_16
+  - first:
+      213: 4088934252008555704
+    second: TwistingAnimation_17
+  - first:
+      213: -36761835239664934
+    second: TwistingAnimation_18
+  - first:
+      213: -5384748949541036717
+    second: TwistingAnimation_19
+  - first:
+      213: -7458720578304437691
+    second: TwistingAnimation_20
+  - first:
+      213: 5478541406698682880
+    second: TwistingAnimation_21
+  - first:
+      213: -237980379529335116
+    second: TwistingAnimation_22
+  - first:
+      213: 2463576054880040400
+    second: TwistingAnimation_23
+  - first:
+      213: 8196899438946522140
+    second: TwistingAnimation_24
+  - first:
+      213: 332905365456408136
+    second: TwistingAnimation_25
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 16384
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: TwistingAnimation_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 82
+        width: 1276
+        height: 913
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f4b5163bb279b9b80800000000000000
+      internalID: -8386943667098526897
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TwistingAnimation_1
+      rect:
+        serializedVersion: 2
+        x: 1520
+        y: 89
+        width: 1274
+        height: 899
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8a275f75d53c325f0800000000000000
+      internalID: -782567104557256024
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TwistingAnimation_2
+      rect:
+        serializedVersion: 2
+        x: 3037
+        y: 96
+        width: 1271
+        height: 885
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 67bf08c67876d05c0800000000000000
+      internalID: -4247625042201871498
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TwistingAnimation_3
+      rect:
+        serializedVersion: 2
+        x: 4551
+        y: 99
+        width: 1267
+        height: 878
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 98b1c5ffaccb5ddb0800000000000000
+      internalID: -4767697050448159863
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TwistingAnimation_4
+      rect:
+        serializedVersion: 2
+        x: 6061
+        y: 92
+        width: 1263
+        height: 893
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5e4e187fa63a3d800800000000000000
+      internalID: 636031652203717861
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TwistingAnimation_5
+      rect:
+        serializedVersion: 2
+        x: 7568
+        y: 85
+        width: 1259
+        height: 907
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b92ba993dc6caba40800000000000000
+      internalID: 5384834889211884187
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TwistingAnimation_6
+      rect:
+        serializedVersion: 2
+        x: 9070
+        y: 78
+        width: 1256
+        height: 921
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c24ef0b495b82dd50800000000000000
+      internalID: 6760619206264218668
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TwistingAnimation_7
+      rect:
+        serializedVersion: 2
+        x: 10569
+        y: 71
+        width: 1252
+        height: 935
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 444442f0684519040800000000000000
+      internalID: 4652592824806818884
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TwistingAnimation_8
+      rect:
+        serializedVersion: 2
+        x: 12065
+        y: 63
+        width: 1247
+        height: 950
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3be646afaffe0e0b0800000000000000
+      internalID: -5701293267029299533
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TwistingAnimation_9
+      rect:
+        serializedVersion: 2
+        x: 13556
+        y: 56
+        width: 1244
+        height: 965
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0ebb7b743fe08a410800000000000000
+      internalID: 1488456114889014240
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TwistingAnimation_10
+      rect:
+        serializedVersion: 2
+        x: 15044
+        y: 49
+        width: 1240
+        height: 979
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d4030b3708bf1aeb0800000000000000
+      internalID: -4710207206137515955
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TwistingAnimation_11
+      rect:
+        serializedVersion: 2
+        x: 16528
+        y: 35
+        width: 1233
+        height: 1006
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 17cc51c984da729c0800000000000000
+      internalID: -3951999620626396047
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TwistingAnimation_14
+      rect:
+        serializedVersion: 2
+        x: 18005
+        y: 49
+        width: 1240
+        height: 979
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fc95f24a1c4725d10800000000000000
+      internalID: 2112879550222260687
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TwistingAnimation_15
+      rect:
+        serializedVersion: 2
+        x: 19489
+        y: 56
+        width: 1244
+        height: 965
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ed2e285040a568570800000000000000
+      internalID: 8468555122635629278
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TwistingAnimation_16
+      rect:
+        serializedVersion: 2
+        x: 20977
+        y: 63
+        width: 1248
+        height: 950
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 268b61727c9c364d0800000000000000
+      internalID: -3142446257782998942
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TwistingAnimation_17
+      rect:
+        serializedVersion: 2
+        x: 22468
+        y: 71
+        width: 1252
+        height: 935
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8b4c5e0c900deb830800000000000000
+      internalID: 4088934252008555704
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TwistingAnimation_18
+      rect:
+        serializedVersion: 2
+        x: 23964
+        y: 78
+        width: 1255
+        height: 921
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ad29f3d3e456d7ff0800000000000000
+      internalID: -36761835239664934
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TwistingAnimation_19
+      rect:
+        serializedVersion: 2
+        x: 25462
+        y: 85
+        width: 1260
+        height: 907
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 35dd2f92c578545b0800000000000000
+      internalID: -5384748949541036717
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TwistingAnimation_20
+      rect:
+        serializedVersion: 2
+        x: 26965
+        y: 92
+        width: 1263
+        height: 893
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 542944be62d4d7890800000000000000
+      internalID: -7458720578304437691
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TwistingAnimation_21
+      rect:
+        serializedVersion: 2
+        x: 28472
+        y: 99
+        width: 1266
+        height: 878
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 00a3b810260b70c40800000000000000
+      internalID: 5478541406698682880
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TwistingAnimation_22
+      rect:
+        serializedVersion: 2
+        x: 29982
+        y: 96
+        width: 1270
+        height: 885
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4be24ae0b1682bcf0800000000000000
+      internalID: -237980379529335116
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TwistingAnimation_23
+      rect:
+        serializedVersion: 2
+        x: 31495
+        y: 89
+        width: 1273
+        height: 899
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0d5784c8e51603220800000000000000
+      internalID: 2463576054880040400
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 0dcb43d7ab018904ca10ce9b09ed5d51
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      TwistingAnimation_0: -8386943667098526897
+      TwistingAnimation_1: -782567104557256024
+      TwistingAnimation_10: -4710207206137515955
+      TwistingAnimation_11: -3951999620626396047
+      TwistingAnimation_12: 7967726833604085653
+      TwistingAnimation_13: -3407580522018321685
+      TwistingAnimation_14: 2112879550222260687
+      TwistingAnimation_15: 8468555122635629278
+      TwistingAnimation_16: -3142446257782998942
+      TwistingAnimation_17: 4088934252008555704
+      TwistingAnimation_18: -36761835239664934
+      TwistingAnimation_19: -5384748949541036717
+      TwistingAnimation_2: -4247625042201871498
+      TwistingAnimation_20: -7458720578304437691
+      TwistingAnimation_21: 5478541406698682880
+      TwistingAnimation_22: -237980379529335116
+      TwistingAnimation_23: 2463576054880040400
+      TwistingAnimation_24: 8196899438946522140
+      TwistingAnimation_25: 332905365456408136
+      TwistingAnimation_3: -4767697050448159863
+      TwistingAnimation_4: 636031652203717861
+      TwistingAnimation_5: 5384834889211884187
+      TwistingAnimation_6: 6760619206264218668
+      TwistingAnimation_7: 4652592824806818884
+      TwistingAnimation_8: -5701293267029299533
+      TwistingAnimation_9: 1488456114889014240
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

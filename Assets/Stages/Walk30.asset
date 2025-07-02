@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3789f41178e8e2479934cd8a06742d4, type: 3}
+  m_Name: Walk30
+  m_EditorClassIdentifier: 
+  challengePrompt: Walk for 60 secs
+  poseRequirements:
+  - {fileID: 11400000, guid: 3e61681acced94e4c8cf932b83f8f7eb, type: 2}
+  walkSuccessUI: {fileID: 3653020837963301686, guid: 514f47936a606c54fb1b38f966472bb8, type: 3}
+  walkFailureUI: {fileID: 1737503936868064422, guid: f6ce5c51b9d162c41b56709e25c98f15, type: 3}
+  jumpSuccessUI: {fileID: 841084763694383587, guid: 783a12e312b39374bbd3ffea6ac7584f, type: 3}
+  jumpFailureUI: {fileID: 7563538925889841187, guid: b51baa1213f78d041b6a8526557748e6, type: 3}
+  twistSuccessUI: {fileID: 0}
+  twistFailureUI: {fileID: 0}
+  successMessage: "\u0E2A\u0E33\u0E40\u0E23\u0E47\u0E08!"
+  failureMessage: "\u0E25\u0E2D\u0E07\u0E43\u0E2B\u0E21\u0E48\u0E2D\u0E35\u0E01\u0E04\u0E23\u0E31\u0E49\u0E07!"
+  requiredHoldTime: 0
+  requiredJumpHeight: 0
+  requiredJumpCount: 0
+  requiredTwistAngle: 0
