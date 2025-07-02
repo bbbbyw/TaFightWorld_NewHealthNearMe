@@ -1,18 +1,16 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Unity.VisualScripting;
 
 public class IntroManager : MonoBehaviour
 {
     [Header("UI Panels")]
     public GameObject introPanel;
     public GameObject startPanel;
-    public GameObject videoPanel;
 
     [Header("Buttons")]
     public Button skipButton;
-    public Button watchButton;
-    public Button videoSkipButton;
 
     [Header("Text")]
     public TextMeshProUGUI storyText;
@@ -23,18 +21,14 @@ public class IntroManager : MonoBehaviour
 
     private bool isTyping = false;
 
-    // ✅ เพิ่มตัวแปรอ้างถึง SquatCounterUI
     public SquatCounterUI squatCounter;
 
     void Start()
     {
         introPanel.SetActive(true);
         startPanel.SetActive(false);
-        videoPanel.SetActive(false);
 
         skipButton.onClick.AddListener(SkipIntro);
-        watchButton.onClick.AddListener(WatchVideo);
-        videoSkipButton.onClick.AddListener(SkipVideo);
 
         StartCoroutine(TypeStory());
     }
@@ -57,19 +51,7 @@ public class IntroManager : MonoBehaviour
     {
         StopAllCoroutines();
         introPanel.SetActive(false);
-        videoPanel.SetActive(true);
-    }
-
-    public void WatchVideo()
-    {
-        introPanel.SetActive(false);
-        videoPanel.SetActive(true);
-    }
-
-    public void SkipVideo()
-    {
-        videoPanel.SetActive(false);
-        startPanel.SetActive(true);
+        skipButton.gameObject.SetActive(false);
     }
 
     public void StartGame()
