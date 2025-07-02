@@ -17,8 +17,23 @@ public class Changscene : MonoBehaviour
         Application.Quit();
     }
 
+    public void GotoStart()
+    {
+        SceneManager.LoadScene("Start Page");
+    }
+
     public void GotoHomepage()
     {
         SceneManager.LoadScene("Homepage");
+    }
+
+    public void GotoDailyLogin()
+    {
+        SceneManager.LoadScene("Daily Login");
+    }
+
+    public void GotoSelectStage()
+    {
+        SceneManager.LoadScene("Select Stage");
     }
 }
