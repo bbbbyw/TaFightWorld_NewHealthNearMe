@@ -18,7 +18,7 @@ MonoBehaviour:
   Type: 1
   DurationRequired: 0
   CountRequired: 30
-  TimeLimit: 60
+  TimeLimit: 90
   LocalVideoFileName: HowToJump.mp4
   CountSFX: {fileID: 8300000, guid: b6e41e48f824bb44fa73fee50583d25f, type: 3}
   HoldSFX: {fileID: 0}

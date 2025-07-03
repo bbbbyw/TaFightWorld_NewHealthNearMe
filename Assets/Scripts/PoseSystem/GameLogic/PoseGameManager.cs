@@ -76,12 +76,15 @@ public class PoseGameManager : MonoBehaviour
     private Coroutine poseTimerCoroutine;
 
     // Callbacks
+    private bool externalModeActive = false;
     private ChallengeTriggerZone currentChallengeTriggerZone;
     private Action<bool> externalCallback; // For sending success/fail at all endings
     public Action onSinglePoseCounted;    // Call every time the count increments by 1 (Realtime Count mode)
     private bool enableSingleCountCallback = false;
+    public Action<int> onHoldIntervalPassed; // Pass the number of seconds held in a loop
+    private float holdInterval = 5f; // Send every 5 seconds
+    private float nextHoldInterval = 5f;
     private bool forceRealtimeCountingOnly = false;
-    private bool externalModeActive = false;
     private bool finalSuccess = true;
     public int CurrentCount => counter;
     public event System.Action<int> OnPoseStageAdvanced;
@@ -90,24 +93,26 @@ public class PoseGameManager : MonoBehaviour
     {
         Debug.Log($"PoseGameManager instances: {FindObjectsOfType<PoseGameManager>().Length}");
 
-        CameraPreview?.SetActive(false);
-        poseIntroPanel?.SetActive(false);
-        resultPanel?.SetActive(false);
-        uiText?.gameObject.SetActive(false);
-        poseIconUI?.gameObject.SetActive(false);
-        poseIconImage?.gameObject.SetActive(false);
-        pauseButton?.gameObject.SetActive(false);
-
-        blackFilter?.gameObject.SetActive(false);
-
-        howToButton?.gameObject.SetActive(false);
-        howToVideoRawImage?.gameObject.SetActive(false);
-        videoPlayer.Stop();
-        videoPlayer.clip = null;
-        videoPlayer.gameObject.SetActive(false);
-        Debug.Log("✅ VideoPlayer force stopped and hidden");
-        videoPlayer.playOnAwake = false;
-        closeVideoButton.gameObject.SetActive(false);
+        // If it is External Mode, do not hide the Panel because the External Manager will control it.
+        if (!externalModeActive)
+        {
+            CameraPreview?.SetActive(false);
+            poseIntroPanel?.SetActive(false);
+            resultPanel?.SetActive(false);
+            uiText?.gameObject.SetActive(false);
+            poseIconUI?.gameObject.SetActive(false);
+            poseIconImage?.gameObject.SetActive(false);
+            pauseButton?.gameObject.SetActive(false);
+            blackFilter?.gameObject.SetActive(false);
+            howToButton?.gameObject.SetActive(false);
+            howToVideoRawImage?.gameObject.SetActive(false);
+            videoPlayer.Stop();
+            videoPlayer.clip = null;
+            videoPlayer.gameObject.SetActive(false);
+            videoPlayer.playOnAwake = false;
+            closeVideoButton?.gameObject.SetActive(false);
+            Debug.Log("✅ VideoPlayer force stopped and hidden");
+        }
 
         isPaused = true;
         isPoseActive = false;
@@ -137,6 +142,7 @@ public class PoseGameManager : MonoBehaviour
         holdTimer = 0f;
         counter = 0;
         isPoseActive = false;
+        nextHoldInterval = holdInterval;
 
         if (!externalModeActive)
         {
@@ -200,9 +206,6 @@ public class PoseGameManager : MonoBehaviour
         {
             poseThaiName.text = currentPose.PoseNameThai ?? "Unnamed Pose";
         }
-
-        Debug.Log($"StartNextPose: Invoking OnPoseStageAdvanced with index {currentPoseIndex}");
-        OnPoseStageAdvanced?.Invoke(currentPoseIndex);
 
         if (poseList == null || poseList.Count == 0 || currentPoseIndex >= poseList.Count)
         {
@@ -309,6 +312,9 @@ public class PoseGameManager : MonoBehaviour
         detector.SetPaused(false);
         detector.OnLandmarksUpdated += OnLandmarksDetected;
         lastUIText = "";
+
+        OnPoseStageAdvanced?.Invoke(currentPoseIndex);
+        Debug.Log($"[DEBUG] poseIntroPanel.SetActive(false) จาก BeginPoseDetection");
 
         if (poseTimerCoroutine != null) StopCoroutine(poseTimerCoroutine);
         poseTimerCoroutine = StartCoroutine(PoseTimeLimit());
@@ -528,6 +534,13 @@ public class PoseGameManager : MonoBehaviour
             if (detected)
             {
                 holdTimer += Time.deltaTime;
+                
+                // Trigger callback on each hold interval
+                if (holdTimer >= nextHoldInterval)
+                {
+                    onHoldIntervalPassed?.Invoke(Mathf.FloorToInt(nextHoldInterval));
+                    nextHoldInterval += holdInterval;
+                }
 
                 if (!isHoldSFXPlaying && currentPose.HoldSFX != null)
                 {
@@ -604,6 +617,8 @@ public class PoseGameManager : MonoBehaviour
         externalCallback = callback;
         externalModeActive = true;
         currentPoseIndex = 0;
+
+        enableSingleCountCallback = true;
         finalSuccess = true;
 
         Debug.Log($"✅ PlayPoseExternal: {poseList.Count} poses loaded. Starting...");

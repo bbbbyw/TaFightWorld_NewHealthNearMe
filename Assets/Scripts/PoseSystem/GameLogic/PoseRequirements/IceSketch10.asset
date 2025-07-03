@@ -17,7 +17,7 @@ MonoBehaviour:
   PoseIcon: {fileID: 21300000, guid: 3f25c7eee9ffa1f48b6e8e554a961dd9, type: 3}
   Type: 1
   DurationRequired: 0
-  CountRequired: 10
+  CountRequired: 2
   TimeLimit: 60
   LocalVideoFileName: HowToJump.mp4
   CountSFX: {fileID: 8300000, guid: aae11aa4d5944904eb11be40d413dd21, type: 3}

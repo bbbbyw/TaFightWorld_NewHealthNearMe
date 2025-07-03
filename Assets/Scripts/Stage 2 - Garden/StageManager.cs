@@ -39,6 +39,15 @@ public class StageManager : MonoBehaviour
     [SerializeField] private GameObject starIconPrefab;
     [SerializeField] private Transform starContainer;
 
+    [Header("Audio")]
+    public AudioSource bgmAudioSource;
+    public AudioSource sfxAudioSource;
+    public AudioClip jumpSound;
+    public AudioClip runSound;
+    public AudioClip findNoticeSound;
+    public AudioClip WinSound;
+    public AudioClip GameOverSound;
+
     // Game state tracking
     private bool isGameCompleted = false;
     public bool IsGameCompleted => isGameCompleted;
@@ -103,6 +112,12 @@ public class StageManager : MonoBehaviour
         retryButton.onClick.AddListener(OnPlayerPressedRestart);
 
         UpdateAttemptsRemainingUI();
+
+        if (bgmAudioSource != null && !bgmAudioSource.isPlaying)
+        {
+            bgmAudioSource.loop = true;
+            bgmAudioSource.Play();
+        }
     }
 
     private bool IsPartOfStorySequence(GameObject obj)
@@ -221,12 +236,21 @@ public class StageManager : MonoBehaviour
                 Vector3 spawnPosition = zone.transform.position + Vector3.up * 2f;
                 successUI = Instantiate(zone.challengeData.walkSuccessUI, spawnPosition, Quaternion.identity);
                 Destroy(successUI, 2f);
+                if (sfxAudioSource != null && runSound != null)
+                {
+                    sfxAudioSource.PlayOneShot(runSound);
+                }
             }
             else if (poseList.Exists(p => p.PoseName.ToLower().Contains("jump")) && zone.challengeData.jumpSuccessUI != null)
             {
                 Vector3 spawnPosition = zone.transform.position + Vector3.up * 4f;
                 successUI = Instantiate(zone.challengeData.jumpSuccessUI, spawnPosition, Quaternion.identity);
                 Destroy(successUI, 2f);
+
+                if (sfxAudioSource != null && jumpSound != null)
+                {
+                    sfxAudioSource.PlayOneShot(jumpSound);
+                }
             }
             else if (poseList.Exists(p => p.PoseName.ToLower().Contains("twist")))
             {
@@ -247,6 +271,11 @@ public class StageManager : MonoBehaviour
                     {
                         playerController.EnableMovement(false);
                     }
+                }
+
+                if (sfxAudioSource != null && findNoticeSound != null)
+                {
+                    sfxAudioSource.PlayOneShot(findNoticeSound);
                 }
 
                 // For TwistBody, show JobNoti UI first
@@ -368,6 +397,16 @@ public class StageManager : MonoBehaviour
 
         stageFailPanel.SetActive(true);
 
+        if (bgmAudioSource != null && bgmAudioSource.isPlaying)
+        {
+            bgmAudioSource.Stop();
+        }
+
+        if (sfxAudioSource != null && GameOverSound != null)
+        {
+            sfxAudioSource.PlayOneShot(GameOverSound);
+        }
+
         foreach (Transform child in stageFailPanel.transform)
         {
             if (!child.gameObject.activeSelf)
@@ -426,7 +465,17 @@ public class StageManager : MonoBehaviour
             {
                 stageCompleteText.text = "ขอแสดงความยินดีด้วย!\nคุณได้งานแล้ว!";
             }
-    
+
+            if (bgmAudioSource != null && bgmAudioSource.isPlaying)
+            {
+                bgmAudioSource.Stop();
+            }
+
+            if (sfxAudioSource != null && WinSound != null)
+            {
+                sfxAudioSource.PlayOneShot(WinSound);
+            }
+
             ShowStarsBasedOnRemainingHearts();
 
             // Reset fail count when game is complete

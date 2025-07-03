@@ -7,7 +7,6 @@ public class IntroManager : MonoBehaviour
 {
     [Header("UI Panels")]
     public GameObject introPanel;
-    public GameObject startPanel;
 
     [Header("Buttons")]
     public Button skipButton;
@@ -16,8 +15,11 @@ public class IntroManager : MonoBehaviour
     public TextMeshProUGUI storyText;
 
     [TextArea]
-    public string fullStory = "การผจญภัยของคุณกำลังจะเริ่มต้นขึ้น...\n\nในเส้นทางที่จะหล่อหลอมให้คุณกลายเป็นอัศวินผู้กล้าหาญ!";
+    public string fullStory = "การผจญภัยของคุณกำลังจะเริ่มต้นขึ้น\nในเส้นทางที่จะหล่อหลอมให้คุณกลายเป็นอัศวินผู้กล้าหาญ!\nแต่รถม้าคุณดันคว่ำรีบเก็บของแล้ววิ่งไปรถม้าเร็ว!";
     public float typingSpeed = 0.05f;
+
+    [Header("Audio")]
+    public AudioSource introMusic;
 
     private bool isTyping = false;
 
@@ -26,11 +28,19 @@ public class IntroManager : MonoBehaviour
     void Start()
     {
         introPanel.SetActive(true);
-        startPanel.SetActive(false);
 
-        skipButton.onClick.AddListener(SkipIntro);
+        if (introMusic != null)
+        {   
+            introMusic.loop = true;
+            introMusic.Play();
+        }
+        else
+        {
+            Debug.LogWarning("🎵 Intro Music AudioSource is not assigned!");
+        }
 
         StartCoroutine(TypeStory());
+        skipButton.onClick.AddListener(SkipIntro);
     }
 
     private System.Collections.IEnumerator TypeStory()
@@ -52,19 +62,23 @@ public class IntroManager : MonoBehaviour
         StopAllCoroutines();
         introPanel.SetActive(false);
         skipButton.gameObject.SetActive(false);
+        StartGame();
     }
 
     public void StartGame()
     {
-        startPanel.SetActive(false);
+        if (introMusic != null && introMusic.isPlaying)
+        {
+            introMusic.Stop();
+        }
 
         if (squatCounter != null)
         {
-            squatCounter.StartCounting();
+            squatCounter.StartSquat();
         }
         else
         {
-            Debug.LogError("SquatCounter ไม่ได้อ้างถึงใน IntroManager!");
+            Debug.LogError("SquatCounter is not referenced in IntroManager!");
         }
     }
 }
