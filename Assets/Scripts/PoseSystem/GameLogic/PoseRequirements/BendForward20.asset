@@ -16,9 +16,9 @@ MonoBehaviour:
   PoseNameThai: "\u0E01\u0E49\u0E21\u0E15\u0E31\u0E27 (\u0E22\u0E37\u0E14\u0E40\u0E2B\u0E22\u0E35\u0E22\u0E14)"
   PoseIcon: {fileID: 21300000, guid: c9f9489b33b0cdf4fb50d9454641fca8, type: 3}
   Type: 0
-  DurationRequired: 20
+  DurationRequired: 5
   CountRequired: 0
-  TimeLimit: 60
+  TimeLimit: 10
   LocalVideoFileName: HowToJump.mp4
   CountSFX: {fileID: 0}
   HoldSFX: {fileID: 8300000, guid: 65c1fae1888f5574b8a5880e608bb00a, type: 3}

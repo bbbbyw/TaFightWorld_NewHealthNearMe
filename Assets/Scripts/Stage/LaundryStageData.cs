@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 [CreateAssetMenu(fileName = "LaundryStage", menuName = "Stages/Laundry")]
 public class LaundryStageData : ScriptableObject
@@ -8,7 +9,13 @@ public class LaundryStageData : ScriptableObject
     {
         public LaundryActionType actionType;
         public string challengeText;
-        
+
+        [Header("Pose Requirements")]
+        public List<PoseRequirement> poseRequirements = new List<PoseRequirement>();
+
+        [Header("SFX Audio")]
+        public AudioClip SFXSound;
+
         [Header("Animation")]
         public float additionalHoldTime = 0f;  // เวลาเพิ่มเติมที่จะรอหลังจาก animation เล่นจบ
         

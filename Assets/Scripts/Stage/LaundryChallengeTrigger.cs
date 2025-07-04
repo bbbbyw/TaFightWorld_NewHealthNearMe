@@ -3,6 +3,9 @@ using UnityEngine.Events;
 
 public class LaundryChallengeTrigger : MonoBehaviour
 {
+    [Header("Stage Manager")]
+    public LaundryStageManager laundryStageManager;
+
     [Header("Challenge Settings")]
     public LaundryActionType actionType;
     public float challengeDuration = 3f; // ระยะเวลาที่ให้ทำ challenge
@@ -15,6 +18,7 @@ public class LaundryChallengeTrigger : MonoBehaviour
     public UnityEvent onChallengeStart;
     public UnityEvent onChallengeSuccess;
     public UnityEvent onChallengeFail;
+    
 
     private void Start()
     {

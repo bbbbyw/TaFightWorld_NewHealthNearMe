@@ -14,18 +14,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   steps:
   - actionType: 0
-    challengeText: Bend down for 20 seconds to pick up the clothes
+    challengeText: "\u0E01\u0E49\u0E21-\u0E40\u0E07\u0E22\u0E28\u0E35\u0E23\u0E29\u0E30\u0E40\u0E1E\u0E37\u0E48\u0E2D\u0E2B\u0E22\u0E34\u0E1A\u0E1C\u0E49\u0E32"
+    poseRequirements:
+    - {fileID: 11400000, guid: 00c7b32376d1b054f8db886301772fbd, type: 2}
+    SFXSound: {fileID: 8300000, guid: bfd83feeb20de3c4eae1a97c245b5685, type: 3}
     additionalHoldTime: 0
     successKey: 97
-    failKey: 273
+    failKey: 32
   - actionType: 1
-    challengeText: Twist your body 30 times to dry the clothes
+    challengeText: "\u0E2B\u0E21\u0E38\u0E19\u0E15\u0E31\u0E27\u0E40\u0E1E\u0E37\u0E48\u0E2D\u0E1A\u0E34\u0E14\u0E1C\u0E49\u0E32\u0E43\u0E2B\u0E49\u0E41\u0E2B\u0E49\u0E07"
+    poseRequirements:
+    - {fileID: 11400000, guid: 0f300fa1c0720684d9b3f09c84d206a5, type: 2}
+    SFXSound: {fileID: 8300000, guid: eac17530171658d4fa2449454ef51b30, type: 3}
     additionalHoldTime: 0
     successKey: 115
-    failKey: 274
+    failKey: 32
   - actionType: 2
-    challengeText: Jump 15 times to hang the clothes
+    challengeText: "\u0E01\u0E23\u0E30\u0E42\u0E14\u0E14\u0E40\u0E1E\u0E37\u0E48\u0E2D\u0E15\u0E32\u0E01\u0E40\u0E2A\u0E37\u0E49\u0E2D\u0E1C\u0E49\u0E32"
+    poseRequirements:
+    - {fileID: 11400000, guid: 5ca6ecc6ef7f6f4439aaa7a2fb2a1ab2, type: 2}
+    SFXSound: {fileID: 8300000, guid: b9314934e8c86c14dbcf797ad018214d, type: 3}
     additionalHoldTime: 0
     successKey: 100
-    failKey: 276
+    failKey: 32
   maxFailAttempts: 3

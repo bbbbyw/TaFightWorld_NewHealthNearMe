@@ -492,6 +492,27 @@ public class PoseGameManager : MonoBehaviour
         PoseCompleted(success);
     }
 
+    public void ForceStopCurrentPose()
+    {
+        Debug.Log("PoseGameManager Force stopping current pose (WITHOUT completing it)");
+
+        isPoseActive = false;
+
+        if (poseTimerCoroutine != null)
+        {
+            StopCoroutine(poseTimerCoroutine);
+            poseTimerCoroutine = null;
+        }
+
+        if (detector != null)
+        {
+            detector.SetPaused(true);
+            detector.OnLandmarksUpdated -= OnLandmarksDetected;
+        }
+
+        Debug.Log("ForceStopCurrentPose cleaned up pose detection and timer.");
+    }
+
     void ProceedToNext()
     {
         resultPanel?.SetActive(false);

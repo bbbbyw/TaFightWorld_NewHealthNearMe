@@ -13,13 +13,12 @@ MonoBehaviour:
   m_Name: Headnod10
   m_EditorClassIdentifier: 
   PoseName: headnod
-  PoseNameThai: "\u0E01\u0E49\u0E21\u0E40\u0E07\u0E22\u0E28\u0E35\u0E23\u0E29\u0E30
-    (\u0E22\u0E37\u0E14\u0E40\u0E2B\u0E22\u0E35\u0E22\u0E14)"
+  PoseNameThai: "\u0E01\u0E49\u0E21-\u0E40\u0E07\u0E22\u0E28\u0E35\u0E23\u0E29\u0E30"
   PoseIcon: {fileID: 21300000, guid: 82ac4d9459dc8aa439c4dece98f02072, type: 3}
   Type: 1
   DurationRequired: 0
-  CountRequired: 10
-  TimeLimit: 60
+  CountRequired: 1
+  TimeLimit: 5
   LocalVideoFileName: HowToJump.mp4
   CountSFX: {fileID: 8300000, guid: aae11aa4d5944904eb11be40d413dd21, type: 3}
   HoldSFX: {fileID: 0}
