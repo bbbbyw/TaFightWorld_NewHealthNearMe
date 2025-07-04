@@ -30,7 +30,8 @@ public class LaundryStageManager : MonoBehaviour
     public UnityEvent onGameOver;
 
     private int currentStepIndex = 0;
-    private int failCount = 0;
+    private int _failCount = 0;
+    public int failCount => _failCount;
     private LaundryChallengeObject currentChallengeObject;
 
     [Header("Pose System")]
@@ -236,7 +237,7 @@ public class LaundryStageManager : MonoBehaviour
         currentChallengeObject.onAnimationComplete.RemoveListener(OnStepComplete);
         currentChallengeObject.PlayAnimation("Fail");
 
-        failCount++;
+        _failCount++;
         UpdateHeartUI();
 
         Debug.Log($"[LaundryStageManager] Remaining attempts: {stageData.maxFailAttempts - failCount}");
@@ -307,7 +308,7 @@ public class LaundryStageManager : MonoBehaviour
     {
         Debug.Log("[LaundryStageManager] Restarting game!");
         currentStepIndex = 0;
-        failCount = 0;
+        _failCount = 0;
         if (bgmAudioSource)
         {
             bgmAudioSource.Stop();
