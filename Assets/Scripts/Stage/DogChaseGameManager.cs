@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.UI; // เพิ่มเพื่อใช้งาน UI
+using UnityEngine.SceneManagement;
 
 public class DogChaseGameManager : MonoBehaviour
 {
@@ -15,20 +16,43 @@ public class DogChaseGameManager : MonoBehaviour
     [Header("Stage Setup")]
     public StageSetup[] stages;               // Array ของทุก stages
     public float transitionDelay = 2f;        // เวลารอระหว่าง stages
-    
+
     [Header("Challenge Settings")]
     public int maxTotalAttempts = 3;  // จำนวนครั้งที่อนุญาตให้ fail รวมทั้งหมด
     public int totalFailCount { get; private set; } = 0;    // จำนวนครั้งที่ fail รวมทั้งหมด
-    
+
     [Header("UI References")]
     public GameObject gameOverPanel;    // Panel แสดง Game Over
     public GameObject successPanel;     // เพิ่ม success panel
     public Button restartButton;        // ปุ่ม Restart
     public Button continueButton;       // ปุ่มสำหรับ success panel
+    public Button retryButton;          // ปุ่มสำหรับ Retry Pose
 
     [Header("Game State")]
     public int currentStageIndex = 0;         // stage ปัจจุบัน
     private bool isTransitioning = false;
+
+    [Header("Pose System")]
+    public GameObject resultPanel;
+    public GameObject PoseIconResult;
+    public GameObject blackFilter;
+
+    [Header("Life System")]
+    public GameObject heartIconPrefab;
+    public Transform heartContainer;
+
+    [Header("Star System")]
+    public GameObject starIconPrefab;
+    public Transform starContainer;
+
+    [Header("Audio")]
+    public AudioSource bgmAudioSource;
+    public AudioSource sfxAudioSource;
+    public AudioClip winSound;
+    public AudioClip gameOverSound;
+    public AudioClip DogBarkSFX;
+
+    private int starCount = 0;
 
     private void Start()
     {
@@ -61,12 +85,35 @@ public class DogChaseGameManager : MonoBehaviour
         {
             gameOverPanel.SetActive(false);
         }
-        
+
         if (successPanel != null)
         {
             successPanel.SetActive(false);
         }
-        
+
+        if (retryButton != null)
+        {
+            retryButton.onClick.AddListener(() =>
+            {
+                Debug.Log("[DogChase] Retry button pressed!");
+                if (currentStageIndex >= 0 && currentStageIndex < stages.Length)
+                {
+                    if (stages[currentStageIndex].challenge != null)
+                    {
+                        stages[currentStageIndex].challenge.RestartChallenge();
+                    }
+                    else
+                    {
+                        Debug.LogWarning("[DogChase] No challenge found for current stage.");
+                    }
+                }
+                else
+                {
+                    Debug.LogWarning($"[DogChase] Invalid currentStageIndex: {currentStageIndex}");
+                }
+            });
+        }
+
         if (restartButton != null)
         {
             restartButton.onClick.AddListener(RestartGame);
@@ -77,13 +124,56 @@ public class DogChaseGameManager : MonoBehaviour
             continueButton.onClick.AddListener(RestartGame); // ใช้ RestartGame เหมือนกัน
         }
 
+        if (sfxAudioSource != null && DogBarkSFX != null)
+        {
+                sfxAudioSource.PlayOneShot(DogBarkSFX);
+        }
+
+        if (bgmAudioSource != null && !bgmAudioSource.isPlaying)
+        {
+            bgmAudioSource.loop = true;
+            bgmAudioSource.Play();
+        }
+
         // Reset fail count
         totalFailCount = 0;
+        UpdateHeartUI();
 
         // Start the first stage
         if (stages.Length > 0 && stages[0].stageController != null)
         {
             stages[0].stageController.StartDogChase();
+        }
+    }
+
+    private void UpdateHeartUI()
+    {
+        int remainingAttempts = maxTotalAttempts - totalFailCount;
+
+        foreach (Transform child in heartContainer)
+        {
+            Destroy(child.gameObject);
+        }
+
+        for (int i = 0; i < remainingAttempts; i++)
+        {
+            Instantiate(heartIconPrefab, heartContainer);
+        }
+    }
+
+    private void ShowStarsBasedOnRemainingHearts()
+    {
+        foreach (Transform child in starContainer)
+        {
+            Destroy(child.gameObject);
+        }
+
+        int remainingHearts = maxTotalAttempts - totalFailCount;
+        starCount = remainingHearts;
+
+        for (int i = 0; i < starCount; i++)
+        {
+            Instantiate(starIconPrefab, starContainer);
         }
     }
 
@@ -97,7 +187,7 @@ public class DogChaseGameManager : MonoBehaviour
             if (currentStageIndex >= stages.Length - 1)
             {
                 Debug.Log("Game Complete!");
-                ShowGameComplete();
+                StartCoroutine(DelayShowGameComplete());
                 return;
             }
 
@@ -116,8 +206,17 @@ public class DogChaseGameManager : MonoBehaviour
         totalFailCount++;
         Debug.Log($"[GameManager] Total fails: {totalFailCount}/{maxTotalAttempts}");
 
+        UpdateHeartUI();
+
         if (totalFailCount >= maxTotalAttempts)
         {
+            if (resultPanel != null && resultPanel.activeSelf)
+            {
+                resultPanel.SetActive(false);
+                blackFilter.gameObject.SetActive(false);
+                PoseIconResult.gameObject.SetActive(false);
+                Debug.Log("[StageManager] resultPanel inactivation!");
+            }
             ShowGameOver();
         }
     }
@@ -142,6 +241,16 @@ public class DogChaseGameManager : MonoBehaviour
         {
             Debug.LogError("Game Over Panel is not assigned!");
         }
+
+        if (bgmAudioSource != null && bgmAudioSource.isPlaying)
+        {
+            bgmAudioSource.Stop();
+        }
+
+        if (sfxAudioSource != null && gameOverSound != null)
+        {
+            sfxAudioSource.PlayOneShot(gameOverSound);
+        }
     }
 
     private void ShowGameComplete()
@@ -150,6 +259,7 @@ public class DogChaseGameManager : MonoBehaviour
         if (successPanel != null)
         {
             successPanel.SetActive(true);
+            ShowStarsBasedOnRemainingHearts();
             if (gameOverPanel != null)
             {
                 gameOverPanel.SetActive(false);
@@ -158,6 +268,16 @@ public class DogChaseGameManager : MonoBehaviour
         else
         {
             Debug.LogError("Success Panel is not assigned!");
+        }
+
+        if (bgmAudioSource != null && bgmAudioSource.isPlaying)
+        {
+            bgmAudioSource.Stop();
+        }
+
+        if (sfxAudioSource != null && winSound != null)
+        {
+            sfxAudioSource.PlayOneShot(winSound);
         }
     }
 
@@ -177,6 +297,8 @@ public class DogChaseGameManager : MonoBehaviour
         currentStageIndex = 0;
         isTransitioning = false;
         totalFailCount = 0;  // Reset total fail count
+        starCount = 0;
+        UpdateHeartUI();
 
         // ปิดทุก stage
         for (int i = 0; i < stages.Length; i++)
@@ -187,15 +309,12 @@ public class DogChaseGameManager : MonoBehaviour
             }
         }
 
-        // เปิด stage แรก
-        if (stages.Length > 0)
+        if (bgmAudioSource != null && !bgmAudioSource.isPlaying)
         {
-            stages[0].stageRoot.SetActive(true);
-            if (stages[0].stageController != null)
-            {
-                stages[0].stageController.StartDogChase();
-            }
+            bgmAudioSource.Play();
         }
+
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     private IEnumerator TransitionToNextStage()
@@ -224,5 +343,11 @@ public class DogChaseGameManager : MonoBehaviour
         }
 
         isTransitioning = false;
+    }
+    
+    private IEnumerator DelayShowGameComplete()
+    {
+        yield return new WaitForSeconds(1.5f);
+        ShowGameComplete();
     }
 } 

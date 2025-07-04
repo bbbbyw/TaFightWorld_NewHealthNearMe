@@ -44,19 +44,6 @@ public class DogChaseChallenge : ChallengeTriggerZone
             return;
         }
 
-        // Setup UI components
-        if (attemptTextObject != null)
-        {
-            // ลองหาทั้ง Text และ TextMeshProUGUI
-            legacyText = attemptTextObject.GetComponent<Text>();
-            tmpText = attemptTextObject.GetComponent<TextMeshProUGUI>();
-            
-            if (legacyText == null && tmpText == null)
-            {
-                Debug.LogWarning("No Text or TextMeshProUGUI component found on attemptTextObject!");
-            }
-        }
-
         // Setup canvas
         if (worldSpaceCanvas != null)
         {
@@ -70,9 +57,6 @@ public class DogChaseChallenge : ChallengeTriggerZone
         {
             failIndicator.SetActive(false);
         }
-
-        // อัพเดท UI ครั้งแรก
-        UpdateAttemptUI();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -104,11 +88,21 @@ public class DogChaseChallenge : ChallengeTriggerZone
         isActive = true;
         Debug.Log($"[DogChase] Starting challenge at position: {transform.position}, Stage Type: {stageController.stageType}");
 
+        if (poseGameManager != null)
+        {
+            poseGameManager.SetCurrentChallengeTriggerZone(this);
+        }
+
+        if (challengeData == null)
+        {
+            Debug.LogError("[DogChase] ❌ No ChallengeData assigned!");
+            return;
+        }
+
         if (worldSpaceCanvas != null)
         {
             worldSpaceCanvas.gameObject.SetActive(true);
             UpdateUIPosition();
-            UpdateAttemptUI();
         }
 
         // ซ่อน fail indicator ถ้ามี
@@ -128,6 +122,8 @@ public class DogChaseChallenge : ChallengeTriggerZone
         {
             stageController.StartDogChase();
         }
+
+        StartCoroutine(DelayStartPoseChallenge());
     }
 
     private void Update()
@@ -135,16 +131,6 @@ public class DogChaseChallenge : ChallengeTriggerZone
         if (!IsActive || playerController == null || stageController.IsTransitioning) return;
 
         UpdateUIPosition();
-
-        // ตรวจสอบการกดปุ่ม
-        if (Input.GetKeyDown(successKey))
-        {
-            CompleteChallenge(true, false);
-        }
-        else if (Input.GetKeyDown(failKey))
-        {
-            CompleteChallenge(false, true);
-        }
     }
 
     public override void CompleteChallenge(bool success, bool waitForPlayerRetry)
@@ -170,43 +156,22 @@ public class DogChaseChallenge : ChallengeTriggerZone
             {
                 gameManager.OnChallengeFail();
             }
-            
+
             // แสดง fail indicator ถ้ามี
             if (failIndicator != null)
             {
                 failIndicator.SetActive(true);
                 StartCoroutine(HideFailIndicator());
             }
-            
+
             // Reset เฉพาะตำแหน่งหมา
             stageController.ResetDogPosition();
-            
-            // อัพเดท UI
-            UpdateAttemptUI();
-            
+
             // ถ้ายังไม่ครบจำนวนครั้ง ให้เริ่ม challenge ใหม่
             if (gameManager != null && gameManager.CanRetryChallenge())
             {
-                StartChallenge();
-            }
-        }
-    }
-
-    private void UpdateAttemptUI()
-    {
-        if (attemptTextObject != null && gameManager != null)
-        {
-            int remainingAttempts = gameManager.maxTotalAttempts - gameManager.totalFailCount;
-            string displayText = $"Attempts remaining: {remainingAttempts}";
-
-            // อัพเดททั้ง Text และ TextMeshProUGUI ถ้ามี
-            if (legacyText != null)
-            {
-                legacyText.text = displayText;
-            }
-            if (tmpText != null)
-            {
-                tmpText.text = displayText;
+                Debug.Log("[DogChase] Fail but still can retry! Waiting for retry button...");
+                // **รอให้ผู้เล่นกด Retry แทนจะ Restart ทันที**
             }
         }
     }
@@ -219,4 +184,12 @@ public class DogChaseChallenge : ChallengeTriggerZone
             failIndicator.SetActive(false);
         }
     }
+    
+    private IEnumerator DelayStartPoseChallenge()
+    {
+        yield return new WaitForSeconds(2f);
+
+        StartPoseChallenge();
+    }
+
 } 

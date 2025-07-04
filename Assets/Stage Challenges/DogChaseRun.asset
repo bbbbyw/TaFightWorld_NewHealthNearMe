@@ -12,16 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3789f41178e8e2479934cd8a06742d4, type: 3}
   m_Name: DogChaseRun
   m_EditorClassIdentifier: 
+  challengePrompt: "\u0E27\u0E34\u0E48\u0E07 1 \u0E19\u0E32\u0E17\u0E35\u0E40\u0E1E\u0E37\u0E48\u0E2D\u0E2B\u0E19\u0E35\u0E08\u0E32\u0E01\u0E2B\u0E21\u0E32!"
   challengeType: 4
-  challengePrompt: Run for 1 minute to run from the dog!
+  poseRequirements:
+  - {fileID: 11400000, guid: d8e43f5a078dba5438018bee4ae84583, type: 2}
   walkSuccessUI: {fileID: 3653020837963301686, guid: 514f47936a606c54fb1b38f966472bb8, type: 3}
   walkFailureUI: {fileID: 1737503936868064422, guid: f6ce5c51b9d162c41b56709e25c98f15, type: 3}
   jumpSuccessUI: {fileID: 0}
   jumpFailureUI: {fileID: 0}
   twistSuccessUI: {fileID: 0}
   twistFailureUI: {fileID: 0}
-  successMessage: Success!
-  failureMessage: Try Again!
+  successMessage: "\u0E2A\u0E33\u0E40\u0E23\u0E47\u0E08!"
+  failureMessage: "\u0E25\u0E2D\u0E07\u0E43\u0E2B\u0E21\u0E48!"
   requiredHoldTime: 0
   requiredJumpHeight: 0
   requiredJumpCount: 0

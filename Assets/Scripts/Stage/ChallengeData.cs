@@ -6,7 +6,8 @@ using System.Collections.Generic;
 public class ChallengeData : ScriptableObject
 {
     [SerializeField]
-    public string challengePrompt;  
+    public string challengePrompt;
+    public ChallengeType challengeType;  
 
     [Header("Pose Requirements")]
     public List<PoseRequirement> poseRequirements = new List<PoseRequirement>();

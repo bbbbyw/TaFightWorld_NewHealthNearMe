@@ -12,16 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3789f41178e8e2479934cd8a06742d4, type: 3}
   m_Name: DogChaseClimb
   m_EditorClassIdentifier: 
+  challengePrompt: "\u0E01\u0E23\u0E30\u0E42\u0E14\u0E14 25 \u0E04\u0E23\u0E31\u0E49\u0E07\u0E40\u0E1E\u0E37\u0E48\u0E2D\u0E1B\u0E35\u0E19\u0E02\u0E36\u0E49\u0E19\u0E15\u0E49\u0E19\u0E44\u0E21\u0E49!"
   challengeType: 5
-  challengePrompt: Jump 25 times to climb the tree!
+  poseRequirements:
+  - {fileID: 11400000, guid: 6febd0e350d33c34c8ffea3d659f6c69, type: 2}
   walkSuccessUI: {fileID: 3283338051340409923, guid: a1622a97cce2cfb4ba7848d0c61a9afc, type: 3}
   walkFailureUI: {fileID: 4141241070173463257, guid: 10e0cb01475360040a7c344d364044f7, type: 3}
   jumpSuccessUI: {fileID: 0}
   jumpFailureUI: {fileID: 0}
   twistSuccessUI: {fileID: 0}
   twistFailureUI: {fileID: 0}
-  successMessage: Success!
-  failureMessage: Try Again!
+  successMessage: "\u0E2A\u0E33\u0E40\u0E23\u0E47\u0E08!"
+  failureMessage: "\u0E25\u0E2D\u0E07\u0E43\u0E2B\u0E21\u0E48!"
   requiredHoldTime: 0
   requiredJumpHeight: 0
   requiredJumpCount: 0

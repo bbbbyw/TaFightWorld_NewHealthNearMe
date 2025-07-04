@@ -28,6 +28,13 @@ public class DogChaseStageController : MonoBehaviour, IDogChaseStage
     private Animator currentAnimator;  // Animator ที่กำลังใช้งาน
     private Animator dogAnimator;      // Animator ของหมา
 
+    [Header("Audio")]
+    public AudioSource sfxAudioSource;
+    public AudioClip DogBarkSFX;
+    public AudioClip RunSFX;
+    public AudioClip ClimbTreeSFX;
+    public AudioClip HappySFX;
+
     private Vector3 dogStartPosition;
     private bool isActive;
     private bool isTransitioning;
@@ -138,7 +145,7 @@ public class DogChaseStageController : MonoBehaviour, IDogChaseStage
                                 {
                                     Debug.Log("[DogChase] Player controller found");
                                     player.transform.position = new Vector3(treeClimbPoint.position.x, player.transform.position.y, player.transform.position.z);
-                                    
+
                                     var rb = player.GetComponent<Rigidbody2D>();
                                     if (rb != null)
                                     {
@@ -204,6 +211,10 @@ public class DogChaseStageController : MonoBehaviour, IDogChaseStage
         if (dogAnimator != null)
         {
             dogAnimator.SetTrigger(isRunning ? "RunAndBark" : "Idle");
+            if (sfxAudioSource != null && DogBarkSFX != null)
+            {
+                sfxAudioSource.PlayOneShot(DogBarkSFX);
+            }
         }
     }
 
@@ -219,6 +230,11 @@ public class DogChaseStageController : MonoBehaviour, IDogChaseStage
         var player = currentChallenge.gameObject.GetComponent<PlayerController>();
         if (player != null)
         {
+            if (sfxAudioSource != null && RunSFX != null)
+            {
+                sfxAudioSource.PlayOneShot(RunSFX);
+            }
+
             var autoWalk = player.gameObject.AddComponent<PlayerAutoWalk>();
             autoWalk.Initialize(characterMoveSpeed);
 
@@ -248,6 +264,12 @@ public class DogChaseStageController : MonoBehaviour, IDogChaseStage
     private IEnumerator ClimbTree(PlayerController player)
     {
         isTransitioning = true;
+
+        if (sfxAudioSource != null && ClimbTreeSFX != null)
+        {
+            sfxAudioSource.PlayOneShot(ClimbTreeSFX);
+        }
+        
         float startY = player.transform.position.y;
         float targetY = startY + climbHeight;
         
@@ -286,6 +308,16 @@ public class DogChaseStageController : MonoBehaviour, IDogChaseStage
             targetY,
             player.transform.position.z
         );
+
+        if (sfxAudioSource.isPlaying)
+        {
+            sfxAudioSource.Stop();
+        }
+
+        if (sfxAudioSource != null && HappySFX != null)
+        {
+            sfxAudioSource.PlayOneShot(HappySFX);
+        }
 
         // รอสักครู่ก่อนจบ stage
         yield return new WaitForSeconds(1f);
