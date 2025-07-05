@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Dreamer_IndieDev.meta
 guid: 4bdbec07531be3f48afce352953934f4
+========
+guid: 4941a93685eb5fb46b8598e2e41e6272
+>>>>>>>> ui-setup:Assets/FeonY.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

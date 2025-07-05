@@ -1,8 +1,15 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Pet Cats pack/Sprites/Cat-1/Cat-1-Idle_0.controller.meta
 guid: a7a58673beea6f54b8b8e878eed69b85
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 9100000
+========
+guid: ec327dcab621bb044a048330c9ebb79f
+folderAsset: yes
+DefaultImporter:
+  externalObjects: {}
+>>>>>>>> ui-setup:Assets/FeonY/Animated Pixel-Art Backgrounds/Art/Animations.meta
   userData: 
   assetBundleName: 
   assetBundleVariant: 
