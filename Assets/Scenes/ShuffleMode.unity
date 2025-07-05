@@ -119,17 +119,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!114 &657967663 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4140039073410908653, guid: 2ded7c58f364e55439481aa661c63573, type: 3}
-  m_PrefabInstance: {fileID: 1505428185321702376}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &732553548
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -438,7 +427,6 @@ MonoBehaviour:
   shufflePanelPrefab: {fileID: 992437971723241915, guid: c04a2d486b4ecc6408f442213bbfd0e3, type: 3}
   uiOffset: {x: -0.45, y: -0.09}
   shufflePanelDuration: 2
-  totalScoreText: {fileID: 657967663}
 --- !u!4 &2109258399
 Transform:
   m_ObjectHideFlags: 0
