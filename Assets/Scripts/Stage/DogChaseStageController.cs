@@ -136,7 +136,7 @@ public class DogChaseStageController : MonoBehaviour, IDogChaseStage
                         }
                         if (treeClimbPoint != null)
                         {
-                            Debug.Log($"[DogChase] Tree climb point found at: {treeClimbPoint.position}");
+                            //Debug.Log($"[DogChase] Tree climb point found at: {treeClimbPoint.position}");
                             var playerObject = GameObject.FindGameObjectWithTag("Player");
                             if (playerObject != null)
                             {
@@ -298,7 +298,7 @@ public class DogChaseStageController : MonoBehaviour, IDogChaseStage
                 newY,
                 player.transform.position.z
             );
-            Debug.Log($"[DogChase] Climbing... Current Y: {player.transform.position.y}");
+            //Debug.Log($"[DogChase] Climbing... Current Y: {player.transform.position.y}");
             yield return null;
         }
 

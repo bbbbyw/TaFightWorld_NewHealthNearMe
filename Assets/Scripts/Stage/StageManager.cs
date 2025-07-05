@@ -15,6 +15,9 @@ public class StageManager : MonoBehaviour
     [SerializeField] private Transform prefabSpawnPoint;
     [SerializeField] private Button retryButton;
 
+    [Header("Stage Navigation")]
+    public string nextSceneName;
+
     [Header("Stage Settings")]
     [SerializeField] private float transitionDelay = 1f;
     [SerializeField] private bool trackStandaloneChallenges = true;
@@ -477,6 +480,7 @@ public class StageManager : MonoBehaviour
             }
 
             ShowStarsBasedOnRemainingHearts();
+            GameProgressManager.Instance.starsPerStage["Stage2 Garden"] = starCount;
 
             // Reset fail count when game is complete
             currentFailCount = 0;
@@ -548,7 +552,7 @@ public class StageManager : MonoBehaviour
         isGameCompleted = state.IsCompleted;
         currentFailCount = state.CurrentFailCount;
         hasShownCompletion = state.HasShownCompletion;
-        
+
         if (hasShownCompletion)
         {
             ShowStarsBasedOnStarCount();
@@ -574,7 +578,7 @@ public class StageManager : MonoBehaviour
             Instantiate(starIconPrefab, starContainer);
         }
     }
-    
+
     private void ShowStarsBasedOnRemainingHearts()
     {
         // Clean the old stars
@@ -593,5 +597,10 @@ public class StageManager : MonoBehaviour
         {
             Instantiate(starIconPrefab, starContainer);
         }
+    }
+    
+    public void OnNextStageButtonClicked()
+    {
+        SceneManager.LoadScene(nextSceneName);
     }
 }

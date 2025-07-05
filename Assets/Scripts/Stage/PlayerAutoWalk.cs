@@ -82,7 +82,7 @@ public class PlayerAutoWalk : MonoBehaviour
             stuckTimer += Time.fixedDeltaTime;
             if (stuckTimer >= STUCK_THRESHOLD)
             {
-                Debug.Log($"[AutoWalk] Stuck detected! Pos: {rb.position}, Distance moved: {distanceMoved}");
+                //Debug.Log($"[AutoWalk] Stuck detected! Pos: {rb.position}, Distance moved: {distanceMoved}");
                 
                 // แก้การติดด้วยหลายวิธี
                 // 1. ใช้ AddForce

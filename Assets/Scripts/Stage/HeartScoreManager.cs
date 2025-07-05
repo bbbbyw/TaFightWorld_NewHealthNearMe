@@ -19,6 +19,8 @@ public class HeartScoreManager : MonoBehaviour
     [SerializeField] private string stageCompleteText;
     [SerializeField] private GameObject stageFailPanel;
     //[SerializeField] private TextMeshProUGUI attemptsRemainingText;
+    [Header("Stage Navigation")]
+    public string nextSceneName;
 
     [Header("Pose System")]
     [SerializeField] private GameObject resultPanel;
@@ -208,6 +210,7 @@ public class HeartScoreManager : MonoBehaviour
             }
 
             ShowStarsBasedOnRemainingHearts();
+            GameProgressManager.Instance.starsPerStage[SceneManager.GetActiveScene().name] = starCount;
 
             // Reset fail count when game is complete
             currentFailCount = 0;
@@ -236,7 +239,7 @@ public class HeartScoreManager : MonoBehaviour
         isGameCompleted = state.IsCompleted;
         currentFailCount = state.CurrentFailCount;
         hasShownCompletion = state.HasShownCompletion;
-        
+
         if (hasShownCompletion)
         {
             ShowStarsBasedOnStarCount();
@@ -262,7 +265,7 @@ public class HeartScoreManager : MonoBehaviour
             Instantiate(starIconPrefab, starContainer);
         }
     }
-    
+
     private void ShowStarsBasedOnRemainingHearts()
     {
         // Clean the old stars
@@ -281,5 +284,17 @@ public class HeartScoreManager : MonoBehaviour
         {
             Instantiate(starIconPrefab, starContainer);
         }
+    }
+    
+    public void OnNextStageButtonClicked()
+    {
+        if (string.IsNullOrEmpty(nextSceneName))
+        {
+            Debug.LogWarning("[HeartScoreManager] Next scene name is empty!");
+            return;
+        }
+
+        Debug.Log($"[HeartScoreManager] Loading next stage: {nextSceneName}");
+        SceneManager.LoadScene(nextSceneName);
     }
 }

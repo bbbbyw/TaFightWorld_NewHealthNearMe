@@ -25,7 +25,7 @@ public class DogChaseGameManager : MonoBehaviour
     public GameObject gameOverPanel;    // Panel แสดง Game Over
     public GameObject successPanel;     // เพิ่ม success panel
     public Button restartButton;        // ปุ่ม Restart
-    public Button continueButton;       // ปุ่มสำหรับ success panel
+    public Button nextStageButton;       // ปุ่มสำหรับ success panel
     public Button retryButton;          // ปุ่มสำหรับ Retry Pose
 
     [Header("Game State")]
@@ -119,14 +119,19 @@ public class DogChaseGameManager : MonoBehaviour
             restartButton.onClick.AddListener(RestartGame);
         }
 
-        if (continueButton != null)
+        if (nextStageButton != null)
         {
-            continueButton.onClick.AddListener(RestartGame); // ใช้ RestartGame เหมือนกัน
+            Debug.Log("[DogChaseGameManager] NextStageButton found, adding listener.");
+            nextStageButton.onClick.AddListener(OnNextStageButtonClicked);
+        }
+        else
+        {
+            Debug.LogError("[DogChaseGameManager] ❌ NextStageButton is NULL!");
         }
 
         if (sfxAudioSource != null && DogBarkSFX != null)
         {
-                sfxAudioSource.PlayOneShot(DogBarkSFX);
+            sfxAudioSource.PlayOneShot(DogBarkSFX);
         }
 
         if (bgmAudioSource != null && !bgmAudioSource.isPlaying)
@@ -260,6 +265,7 @@ public class DogChaseGameManager : MonoBehaviour
         {
             successPanel.SetActive(true);
             ShowStarsBasedOnRemainingHearts();
+            GameProgressManager.Instance.starsPerStage["Stage1 Dog"] = starCount;
             if (gameOverPanel != null)
             {
                 gameOverPanel.SetActive(false);
@@ -344,10 +350,16 @@ public class DogChaseGameManager : MonoBehaviour
 
         isTransitioning = false;
     }
-    
+
     private IEnumerator DelayShowGameComplete()
     {
         yield return new WaitForSeconds(1.5f);
         ShowGameComplete();
     }
+    public void OnNextStageButtonClicked()
+    {
+        Debug.Log("[DogChaseGameManager] Next Stage button clicked!");
+        SceneManager.LoadScene("Stage2 Garden");
+    }
+
 } 

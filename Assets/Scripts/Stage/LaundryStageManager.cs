@@ -21,7 +21,6 @@ public class LaundryStageManager : MonoBehaviour
     public GameObject successPanel;
     public Button restartButton;        // ปุ่ม Restart
     public Button NextStageButton;       // ปุ่มสำหรับ Win Panel
-    public string nextSceneName;
     public Button retryButton;          // ปุ่มสำหรับ Retry Pose
     public TransitionManager transitionManager;
 
@@ -211,6 +210,7 @@ public class LaundryStageManager : MonoBehaviour
             currentChallengeObject = null; // เคลียร์ reference เพื่อป้องกัน error
 
             ShowStarsBasedOnRemainingHearts();
+            GameProgressManager.Instance.starsPerStage["Stage1 Dog"] = stageData.maxFailAttempts - failCount;
 
             if (bgmAudioSource) bgmAudioSource.Stop();
             if (successPanel) successPanel.SetActive(true);
@@ -329,20 +329,9 @@ public class LaundryStageManager : MonoBehaviour
         OnStepFail();
     }
     
-    private void OnNextStageButtonClicked()
+    public void OnNextStageButtonClicked()
     {
-        if (!string.IsNullOrEmpty(nextSceneName))
-        {
-            Debug.Log("[LaundryStageManager] Loading next scene: " + nextSceneName);
-
-            if (bgmAudioSource)
-                bgmAudioSource.Stop();
-
-            SceneManager.LoadScene(nextSceneName);
-        }
-        else
-        {
-            Debug.LogWarning("[LaundryStageManager] Next scene name is empty or null.");
-        }
+        SceneManager.LoadScene("Stage4 AccidentSt");
     }
+    
 } 
