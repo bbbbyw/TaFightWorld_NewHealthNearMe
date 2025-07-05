@@ -32,6 +32,7 @@ public class ChallengeTriggerZone : MonoBehaviour
 
     // Public properties
     public bool IsActive => isActive;
+    public bool IsCompleted { get; private set; }
 
     // Private fields
     protected bool isActive = false;
@@ -229,6 +230,7 @@ public class ChallengeTriggerZone : MonoBehaviour
         }
 
         isActive = false;
+        IsCompleted = success;
         Debug.Log($"[Challenge] Challenge completed - Success: {success}, Position: {transform.position}");
 
         if (worldSpaceCanvas != null)

@@ -7,6 +7,7 @@ using Mediapipe.Tasks.Vision.PoseLandmarker;
 using Mediapipe.Tasks.Components.Containers;
 using Mediapipe.Tasks.Core;
 using Mediapipe.Tasks.Vision.Core;
+using System.Linq;
 
 public class PoseLandmarkerLive : MonoBehaviour
 {
@@ -24,7 +25,44 @@ public class PoseLandmarkerLive : MonoBehaviour
 
     void Start()
     {
-        webcamTexture = new WebCamTexture();
+        // Get all available webcams
+        WebCamDevice[] devices = WebCamTexture.devices;
+        
+        if (devices.Length == 0)
+        {
+            Debug.LogError("No webcam found!");
+            return;
+        }
+
+        Debug.Log($"Found {devices.Length} camera(s):");
+        WebCamDevice selectedDevice = devices[0]; // Default to first camera
+        WebCamDevice? lastFrontFacing = null;
+
+        for (int i = 0; i < devices.Length; i++)
+        {
+            var device = devices[i];
+            Debug.Log($"Camera {i}: {device.name}, isFrontFacing: {device.isFrontFacing}");
+            
+            if (device.isFrontFacing)
+            {
+                lastFrontFacing = device;
+                Debug.Log($"Found front-facing camera: {device.name}");
+            }
+        }
+
+        // Select the last front-facing camera if available
+        if (lastFrontFacing.HasValue)
+        {
+            selectedDevice = lastFrontFacing.Value;
+            Debug.Log($"Selected front-facing camera: {selectedDevice.name}");
+        }
+        else
+        {
+            Debug.Log($"No front-facing camera found, using default camera: {selectedDevice.name}");
+        }
+
+        // Create WebCamTexture with the selected device
+        webcamTexture = new WebCamTexture(selectedDevice.name);
         webcamTexture.Play();
 
         if (cameraPreview != null)
