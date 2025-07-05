@@ -1,9 +1,11 @@
 fileFormatVersion: 2
+<<<<<<< Updated upstream
+=======
 <<<<<<<< HEAD:Assets/Free_Pack.meta
-guid: e36268d3e8d2872468112fa6c2f31094
+guid: 9a8d0fd0025f89940b359d5df15969d6
 ========
+>>>>>>> Stashed changes
 guid: 504e2d4e112bef84b8ec2859962d2bad
->>>>>>>> ui-setup:Assets/FeonY/Animated Pixel-Art Backgrounds/Art.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
