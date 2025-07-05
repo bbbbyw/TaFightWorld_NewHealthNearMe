@@ -25,7 +25,7 @@ public class LaundryChallengeObject
     // Event ที่จะถูกเรียกหลังจาก animation จบ
     public UnityEvent onAnimationComplete = new UnityEvent();
 
-    private MonoBehaviour coroutineRunner;  // ใช้สำหรับรัน coroutine
+    private MonoBehaviour coroutineRunner;  // ใช้สำหรับรัน coroutine_
     private AnimatorStateInfo currentState;
     private float animationLength;
 

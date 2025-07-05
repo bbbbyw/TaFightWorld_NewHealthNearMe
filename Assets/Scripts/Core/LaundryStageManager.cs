@@ -25,7 +25,9 @@ public class LaundryStageManager : MonoBehaviour
     public UnityEvent onGameOver;
 
     private int currentStepIndex = 0;
-    private int failCount = 0;
+    private int _failCount = 0;
+    public int failCount => _failCount; // Expose failCount as read-only property
+
     private LaundryChallengeObject currentChallengeObject;
 
     private void Start()
@@ -153,19 +155,19 @@ public class LaundryStageManager : MonoBehaviour
 
     private void OnStepFail()
     {
-        Debug.Log($"[LaundryStageManager] Challenge failed! Current fail count: {failCount + 1}");
+        Debug.Log($"[LaundryStageManager] Challenge failed! Current fail count: {_failCount + 1}");
         
         currentChallengeObject.PlayAnimation("Fail");
 
-        failCount++;
+        _failCount++;
         
         // อัพเดทจำนวน attempts ที่เหลือ
         UpdateAttemptsRemainingUI();
 
-        Debug.Log($"[LaundryStageManager] Remaining attempts: {stageData.maxFailAttempts - failCount}");
+        Debug.Log($"[LaundryStageManager] Remaining attempts: {stageData.maxFailAttempts - _failCount}");
 
         // ถ้าเกิน max attempts ถึงจะแสดง game over
-        if (failCount >= stageData.maxFailAttempts)
+        if (_failCount >= stageData.maxFailAttempts)
         {
             Debug.Log("[LaundryStageManager] Max attempts reached! Showing game over panel");
             gameOverPanel.SetActive(true);
@@ -181,7 +183,7 @@ public class LaundryStageManager : MonoBehaviour
     {
         if (attemptsRemainingText != null)
         {
-            int remainingAttempts = stageData.maxFailAttempts - failCount;
+            int remainingAttempts = stageData.maxFailAttempts - _failCount;
             attemptsRemainingText.text = $"Attempts Remaining: {remainingAttempts}";
             attemptsRemainingText.gameObject.SetActive(true);
             Debug.Log($"[LaundryStageManager] Updated UI - Attempts remaining: {remainingAttempts}");

@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d1e6194a574b1b4da31cb82591c17f5, type: 3}
+  m_Name: ShuffleModeConfig
+  m_EditorClassIdentifier: 
+  shuffleModeUIPrefab: {fileID: 893795596252468957, guid: 2ded7c58f364e55439481aa661c63573, type: 3}
+  stageScenes:
+  - Stage1 Dog
+  - Stage2 Garden
+  - Stage3 Laundry
+  maxFailCount: 3
