@@ -210,7 +210,7 @@ public class LaundryStageManager : MonoBehaviour
             currentChallengeObject = null; // เคลียร์ reference เพื่อป้องกัน error
 
             ShowStarsBasedOnRemainingHearts();
-            GameProgressManager.Instance.starsPerStage["Stage1 Dog"] = stageData.maxFailAttempts - failCount;
+            GameProgressManager.Instance.starsPerStage["Stage1 Dog"] = stageData.maxFailAttempts - _failCount;
 
             if (bgmAudioSource) bgmAudioSource.Stop();
             if (successPanel) successPanel.SetActive(true);
@@ -231,7 +231,7 @@ public class LaundryStageManager : MonoBehaviour
         if (isStepFinished) return;
         isStepFinished = true;
 
-        Debug.Log($"[LaundryStageManager] Challenge failed! Current fail count: {failCount + 1}");
+        Debug.Log($"[LaundryStageManager] Challenge failed! Current fail count: {_failCount + 1}");
 
         // ลบ listener OnStepComplete ออกก่อน เพื่อไม่ให้ trigger step ถัดไปตอน animation fail จบ
         currentChallengeObject.onAnimationComplete.RemoveListener(OnStepComplete);
@@ -240,9 +240,9 @@ public class LaundryStageManager : MonoBehaviour
         _failCount++;
         UpdateHeartUI();
 
-        Debug.Log($"[LaundryStageManager] Remaining attempts: {stageData.maxFailAttempts - failCount}");
+        Debug.Log($"[LaundryStageManager] Remaining attempts: {stageData.maxFailAttempts - _failCount}");
 
-        if (failCount >= stageData.maxFailAttempts)
+        if (_failCount >= stageData.maxFailAttempts)
         {
             // เกินจำนวนครั้งที่กำหนด แสดงเกมโอเวอร์
             Debug.Log("[LaundryStageManager] Max attempts reached! Showing game over panel");
@@ -287,7 +287,7 @@ public class LaundryStageManager : MonoBehaviour
         foreach (Transform child in heartContainer)
             Destroy(child.gameObject);
 
-        int remaining = stageData.maxFailAttempts - failCount;
+        int remaining = stageData.maxFailAttempts - _failCount;
 
         for (int i = 0; i < remaining; i++)
             Instantiate(heartIconPrefab, heartContainer);
@@ -298,7 +298,7 @@ public class LaundryStageManager : MonoBehaviour
         foreach (Transform child in starContainer)
             Destroy(child.gameObject);
 
-        int stars = stageData.maxFailAttempts - failCount;
+        int stars = stageData.maxFailAttempts - _failCount;
 
         for (int i = 0; i < stars; i++)
             Instantiate(starIconPrefab, starContainer);
