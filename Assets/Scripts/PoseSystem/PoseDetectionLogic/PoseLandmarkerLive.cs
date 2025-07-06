@@ -32,7 +32,7 @@ public class PoseLandmarkerLive : MonoBehaviour
 
             if (device.isFrontFacing)
             {
-                webcamTexture = new WebCamTexture(device.name);
+                webcamTexture = new WebCamTexture(device.name, 640, 480, 15);
                 break;
             }
         }
@@ -40,7 +40,7 @@ public class PoseLandmarkerLive : MonoBehaviour
         // ถ้าไม่เจอกล้องหน้า ให้ fallback
         if (webcamTexture == null)
         {
-            webcamTexture = new WebCamTexture();
+            webcamTexture = new WebCamTexture(null, 640, 480, 15); 
         }
 
         webcamTexture.Play();

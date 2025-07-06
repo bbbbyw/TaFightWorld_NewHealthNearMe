@@ -1,0 +1,1222 @@
+fileFormatVersion: 2
+guid: 6223d31968b727046b330fedde172dc8
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -7952461442641264423
+    second: Dressing_0
+  - first:
+      213: 7286449734163123635
+    second: Dressing_1
+  - first:
+      213: 8521180750582435265
+    second: Dressing_2
+  - first:
+      213: -4188079855255040020
+    second: Dressing_3
+  - first:
+      213: 1435140228809084193
+    second: Dressing_4
+  - first:
+      213: 2126207760125656758
+    second: Dressing_5
+  - first:
+      213: 2747040274614667806
+    second: Dressing_6
+  - first:
+      213: -843161353770663829
+    second: Dressing_7
+  - first:
+      213: 3179768069159625563
+    second: Dressing_8
+  - first:
+      213: 9094844378251233034
+    second: Dressing_9
+  - first:
+      213: 3331549919469363354
+    second: Dressing_10
+  - first:
+      213: 5658585191761332751
+    second: Dressing_11
+  - first:
+      213: 3549367605279666995
+    second: Dressing_12
+  - first:
+      213: -6067095780053737691
+    second: Dressing_13
+  - first:
+      213: 1890312253525342388
+    second: Dressing_14
+  - first:
+      213: -7913704227545820941
+    second: Dressing_15
+  - first:
+      213: 7925106259821538767
+    second: Dressing_16
+  - first:
+      213: -3697222200162331016
+    second: Dressing_17
+  - first:
+      213: -704731245554186693
+    second: Dressing_18
+  - first:
+      213: 9056745637722726511
+    second: Dressing_19
+  - first:
+      213: -2778822546555385281
+    second: Dressing_20
+  - first:
+      213: -1026961971333585429
+    second: Dressing_21
+  - first:
+      213: -268424909500273787
+    second: Dressing_22
+  - first:
+      213: -2675255177536237088
+    second: Dressing_23
+  - first:
+      213: -2832669088821164277
+    second: Dressing_24
+  - first:
+      213: 7228691977825752802
+    second: Dressing_25
+  - first:
+      213: 6434739562325403001
+    second: Dressing_26
+  - first:
+      213: -7703009214634055970
+    second: Dressing_27
+  - first:
+      213: 6984062908135647983
+    second: Dressing_28
+  - first:
+      213: -288983532764030162
+    second: Dressing_29
+  - first:
+      213: -3143979017874721613
+    second: Dressing_30
+  - first:
+      213: 3361931615142972788
+    second: Dressing_31
+  - first:
+      213: -7183346399743426777
+    second: Dressing_32
+  - first:
+      213: 5171378112079366553
+    second: Dressing_33
+  - first:
+      213: -2707728883988962563
+    second: Dressing_34
+  - first:
+      213: -7745948779216816886
+    second: Dressing_35
+  - first:
+      213: -6666884452971293305
+    second: Dressing_36
+  - first:
+      213: 5441124794375933526
+    second: Dressing_37
+  - first:
+      213: 4277859523117427214
+    second: Dressing_38
+  - first:
+      213: 6633177080579727667
+    second: Dressing_39
+  - first:
+      213: 1683862213933192942
+    second: Dressing_40
+  - first:
+      213: -8312877907190932077
+    second: Dressing_41
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Dressing_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 767
+        width: 65
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9d0806da37e23a190800000000000000
+      internalID: -7952461442641264423
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dressing_1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 703
+        width: 65
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3bd488e8d6bae1560800000000000000
+      internalID: 7286449734163123635
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dressing_2
+      rect:
+        serializedVersion: 2
+        x: 63
+        y: 767
+        width: 66
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1cdcc59deb0514670800000000000000
+      internalID: 8521180750582435265
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dressing_3
+      rect:
+        serializedVersion: 2
+        x: 63
+        y: 575
+        width: 194
+        height: 194
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cefcd80af83f0e5c0800000000000000
+      internalID: -4188079855255040020
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dressing_4
+      rect:
+        serializedVersion: 2
+        x: 127
+        y: 767
+        width: 66
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 12dc9053f64aae310800000000000000
+      internalID: 1435140228809084193
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dressing_5
+      rect:
+        serializedVersion: 2
+        x: 127
+        y: 575
+        width: 193
+        height: 194
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6bef7f451bec18d10800000000000000
+      internalID: 2126207760125656758
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dressing_6
+      rect:
+        serializedVersion: 2
+        x: 191
+        y: 767
+        width: 66
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e1a491843927f1620800000000000000
+      internalID: 2747040274614667806
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dressing_7
+      rect:
+        serializedVersion: 2
+        x: 255
+        y: 767
+        width: 65
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b60892c473d7c44f0800000000000000
+      internalID: -843161353770663829
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dressing_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 639
+        width: 65
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b53a366363ec02c20800000000000000
+      internalID: 3179768069159625563
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dressing_9
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 575
+        width: 65
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a078f1586c0673e70800000000000000
+      internalID: 9094844378251233034
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dressing_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 511
+        width: 53
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a90e37d100b0c3e20800000000000000
+      internalID: 3331549919469363354
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dressing_11
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 447
+        width: 65
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f0a483e5045578e40800000000000000
+      internalID: 5658585191761332751
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dressing_12
+      rect:
+        serializedVersion: 2
+        x: 63
+        y: 447
+        width: 114
+        height: 130
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 33339f91803e14130800000000000000
+      internalID: 3549367605279666995
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dressing_13
+      rect:
+        serializedVersion: 2
+        x: 127
+        y: 447
+        width: 66
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 52f10ab68885dcba0800000000000000
+      internalID: -6067095780053737691
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dressing_14
+      rect:
+        serializedVersion: 2
+        x: 191
+        y: 511
+        width: 52
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4b832f1bafcbb3a10800000000000000
+      internalID: 1890312253525342388
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dressing_15
+      rect:
+        serializedVersion: 2
+        x: 191
+        y: 447
+        width: 66
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3f0df930fefdc2290800000000000000
+      internalID: -7913704227545820941
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dressing_16
+      rect:
+        serializedVersion: 2
+        x: 255
+        y: 511
+        width: 54
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fcd23ef7722abfd60800000000000000
+      internalID: 7925106259821538767
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dressing_17
+      rect:
+        serializedVersion: 2
+        x: 255
+        y: 447
+        width: 65
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 876d2a76ff3d0bcc0800000000000000
+      internalID: -3697222200162331016
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dressing_18
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 383
+        width: 51
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b36cf9e7aaa4836f0800000000000000
+      internalID: -704731245554186693
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dressing_19
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 319
+        width: 65
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f60288d3c2600bd70800000000000000
+      internalID: 9056745637722726511
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dressing_20
+      rect:
+        serializedVersion: 2
+        x: 63
+        y: 383
+        width: 52
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f3a48b2ed93af69d0800000000000000
+      internalID: -2778822546555385281
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dressing_21
+      rect:
+        serializedVersion: 2
+        x: 63
+        y: 319
+        width: 66
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: be5a3d4378f7fb1f0800000000000000
+      internalID: -1026961971333585429
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dressing_22
+      rect:
+        serializedVersion: 2
+        x: 127
+        y: 383
+        width: 52
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 58bae5c87fc564cf0800000000000000
+      internalID: -268424909500273787
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dressing_23
+      rect:
+        serializedVersion: 2
+        x: 127
+        y: 319
+        width: 66
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0e19d6317959fdad0800000000000000
+      internalID: -2675255177536237088
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dressing_24
+      rect:
+        serializedVersion: 2
+        x: 191
+        y: 383
+        width: 52
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b07c59ac87650b8d0800000000000000
+      internalID: -2832669088821164277
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dressing_25
+      rect:
+        serializedVersion: 2
+        x: 191
+        y: 319
+        width: 62
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2e61509fd09715460800000000000000
+      internalID: 7228691977825752802
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dressing_26
+      rect:
+        serializedVersion: 2
+        x: 255
+        y: 383
+        width: 52
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 975ee8a0a89cc4950800000000000000
+      internalID: 6434739562325403001
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dressing_27
+      rect:
+        serializedVersion: 2
+        x: 255
+        y: 319
+        width: 58
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ed62d2c7ee9691590800000000000000
+      internalID: -7703009214634055970
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dressing_28
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 191
+        width: 320
+        height: 130
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fea286836306ce060800000000000000
+      internalID: 6984062908135647983
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dressing_29
+      rect:
+        serializedVersion: 2
+        x: 63
+        y: 0
+        width: 68
+        height: 193
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e2b99af02035dfbf0800000000000000
+      internalID: -288983532764030162
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dressing_30
+      rect:
+        serializedVersion: 2
+        x: 139
+        y: 129
+        width: 44
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3b4bb42adb75e54d0800000000000000
+      internalID: -3143979017874721613
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dressing_31
+      rect:
+        serializedVersion: 2
+        x: 13
+        y: 129
+        width: 40
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 47d80cfddfaf7ae20800000000000000
+      internalID: 3361931615142972788
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dressing_32
+      rect:
+        serializedVersion: 2
+        x: 195
+        y: 133
+        width: 58
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 72f36b82280af4c90800000000000000
+      internalID: -7183346399743426777
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dressing_33
+      rect:
+        serializedVersion: 2
+        x: 265
+        y: 129
+        width: 50
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 99988b96efc64c740800000000000000
+      internalID: 5171378112079366553
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dressing_34
+      rect:
+        serializedVersion: 2
+        x: 13
+        y: 67
+        width: 40
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: df2e5c91de63c6ad0800000000000000
+      internalID: -2707728883988962563
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dressing_35
+      rect:
+        serializedVersion: 2
+        x: 139
+        y: 65
+        width: 44
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a05396600acd08490800000000000000
+      internalID: -7745948779216816886
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dressing_36
+      rect:
+        serializedVersion: 2
+        x: 197
+        y: 69
+        width: 54
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7855216a9e77a73a0800000000000000
+      internalID: -6666884452971293305
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dressing_37
+      rect:
+        serializedVersion: 2
+        x: 265
+        y: 65
+        width: 50
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 65e09531c22c28b40800000000000000
+      internalID: 5441124794375933526
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dressing_38
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 1
+        width: 46
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e0aaf6a32920e5b30800000000000000
+      internalID: 4277859523117427214
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dressing_39
+      rect:
+        serializedVersion: 2
+        x: 139
+        y: 1
+        width: 44
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 331a7342967cd0c50800000000000000
+      internalID: 6633177080579727667
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dressing_40
+      rect:
+        serializedVersion: 2
+        x: 195
+        y: 5
+        width: 58
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ee6d03813c74e5710800000000000000
+      internalID: 1683862213933192942
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dressing_41
+      rect:
+        serializedVersion: 2
+        x: 265
+        y: 3
+        width: 50
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 39d11b04699b2ac80800000000000000
+      internalID: -8312877907190932077
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Dressing_0: -7952461442641264423
+      Dressing_1: 7286449734163123635
+      Dressing_10: 3331549919469363354
+      Dressing_11: 5658585191761332751
+      Dressing_12: 3549367605279666995
+      Dressing_13: -6067095780053737691
+      Dressing_14: 1890312253525342388
+      Dressing_15: -7913704227545820941
+      Dressing_16: 7925106259821538767
+      Dressing_17: -3697222200162331016
+      Dressing_18: -704731245554186693
+      Dressing_19: 9056745637722726511
+      Dressing_2: 8521180750582435265
+      Dressing_20: -2778822546555385281
+      Dressing_21: -1026961971333585429
+      Dressing_22: -268424909500273787
+      Dressing_23: -2675255177536237088
+      Dressing_24: -2832669088821164277
+      Dressing_25: 7228691977825752802
+      Dressing_26: 6434739562325403001
+      Dressing_27: -7703009214634055970
+      Dressing_28: 6984062908135647983
+      Dressing_29: -288983532764030162
+      Dressing_3: -4188079855255040020
+      Dressing_30: -3143979017874721613
+      Dressing_31: 3361931615142972788
+      Dressing_32: -7183346399743426777
+      Dressing_33: 5171378112079366553
+      Dressing_34: -2707728883988962563
+      Dressing_35: -7745948779216816886
+      Dressing_36: -6666884452971293305
+      Dressing_37: 5441124794375933526
+      Dressing_38: 4277859523117427214
+      Dressing_39: 6633177080579727667
+      Dressing_4: 1435140228809084193
+      Dressing_40: 1683862213933192942
+      Dressing_41: -8312877907190932077
+      Dressing_5: 2126207760125656758
+      Dressing_6: 2747040274614667806
+      Dressing_7: -843161353770663829
+      Dressing_8: 3179768069159625563
+      Dressing_9: 9094844378251233034
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
