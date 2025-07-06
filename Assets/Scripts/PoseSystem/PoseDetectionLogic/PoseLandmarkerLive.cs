@@ -7,7 +7,6 @@ using Mediapipe.Tasks.Vision.PoseLandmarker;
 using Mediapipe.Tasks.Components.Containers;
 using Mediapipe.Tasks.Core;
 using Mediapipe.Tasks.Vision.Core;
-using System.Linq;
 
 public class PoseLandmarkerLive : MonoBehaviour
 {
@@ -25,44 +24,25 @@ public class PoseLandmarkerLive : MonoBehaviour
 
     void Start()
     {
-        // Get all available webcams
+        // เลือกกล้องหน้า
         WebCamDevice[] devices = WebCamTexture.devices;
-        
-        if (devices.Length == 0)
+        foreach (var device in devices)
         {
-            Debug.LogError("No webcam found!");
-            return;
-        }
+            Debug.Log($"Device name: {device.name}, front facing: {device.isFrontFacing}");
 
-        Debug.Log($"Found {devices.Length} camera(s):");
-        WebCamDevice selectedDevice = devices[0]; // Default to first camera
-        WebCamDevice? lastFrontFacing = null;
-
-        for (int i = 0; i < devices.Length; i++)
-        {
-            var device = devices[i];
-            Debug.Log($"Camera {i}: {device.name}, isFrontFacing: {device.isFrontFacing}");
-            
             if (device.isFrontFacing)
             {
-                lastFrontFacing = device;
-                Debug.Log($"Found front-facing camera: {device.name}");
+                webcamTexture = new WebCamTexture(device.name);
+                break;
             }
         }
 
-        // Select the last front-facing camera if available
-        if (lastFrontFacing.HasValue)
+        // ถ้าไม่เจอกล้องหน้า ให้ fallback
+        if (webcamTexture == null)
         {
-            selectedDevice = lastFrontFacing.Value;
-            Debug.Log($"Selected front-facing camera: {selectedDevice.name}");
-        }
-        else
-        {
-            Debug.Log($"No front-facing camera found, using default camera: {selectedDevice.name}");
+            webcamTexture = new WebCamTexture();
         }
 
-        // Create WebCamTexture with the selected device
-        webcamTexture = new WebCamTexture(selectedDevice.name);
         webcamTexture.Play();
 
         if (cameraPreview != null)
@@ -90,12 +70,10 @@ public class PoseLandmarkerLive : MonoBehaviour
 
                     if (previousLandmarks.TryGetValue(i, out Vector3 prev))
                     {
-                        /*
                         if (IsMoving(prev, current))
                         {
                             Debug.Log($"Landmark[{i}] moved to X:{current.x:F3}, Y:{current.y:F3}, Z:{current.z:F3}");
                         }
-                        */
                     }
 
                     previousLandmarks[i] = current;
@@ -107,7 +85,6 @@ public class PoseLandmarkerLive : MonoBehaviour
 
         landmarker = PoseLandmarker.CreateFromOptions(options);
     }
-
     public void SetPaused(bool paused)
     {
         isPaused = paused;

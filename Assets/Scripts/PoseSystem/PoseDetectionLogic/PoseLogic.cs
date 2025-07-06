@@ -12,16 +12,16 @@ public class PoseLogic : MonoBehaviour
 
     // Help with walking timing
     private Queue<bool> walkHistory = new Queue<bool>();
-    private const int maxFrames = 45; // Extend the time (1.5 seconds at 30 FPS)
-    private const float walkThreshold = 0.02f; // Count walk slowly
-    private const float walkTriggerRatio = 0.15f; // Walking 15% of the frame is considered walking.
-    private float lastRunDetectedTime = -1f; // Adjustable up to 0.15f
+    private const int maxFrames = 60; 
+    private const float walkThreshold = 0.015f; 
+    private const float walkTriggerRatio = 0.10f; 
+    private float lastRunDetectedTime = -1f; 
 
     // Help with running timing
     private Queue<bool> runHistory = new Queue<bool>();
-    private const float runThreshold = 0.10f;
-    private const int runMaxFrames = 30;
-    private const float runTriggerRatio = 0.25f;
+    private const float runThreshold = 0.06f;     
+    private const int runMaxFrames = 45;
+    private const float runTriggerRatio = 0.15f; 
 
     // For detectTwist()
     private static bool isTwisting = false;  

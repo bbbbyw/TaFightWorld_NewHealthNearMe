@@ -34,7 +34,7 @@ public class SquatCounterUI : MonoBehaviour
     private float runTimeLeft = 0f;
 
     private int currentSquats = 0;
-    private int maxSquats = 1;
+    private int maxSquats = 15;
 
     private bool isSquat = false;
     private bool isResting = false;
