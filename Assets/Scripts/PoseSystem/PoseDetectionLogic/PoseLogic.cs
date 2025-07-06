@@ -298,9 +298,23 @@ public class PoseLogic : MonoBehaviour
     public static bool DetectJump(List<Vector3> lm, float prevY, out float newY)
     {
         newY = lm[Pose.NOSE].y;
+
         if (float.IsNaN(prevY))
             return false;
-        return (prevY - newY) > 0.03f;
+
+        float leftAnkleY = lm[Pose.LEFT_ANKLE].y;
+        float rightAnkleY = lm[Pose.RIGHT_ANKLE].y;
+        float avgAnkleY = (leftAnkleY + rightAnkleY) / 2f;
+
+        float leftHipY = lm[Pose.LEFT_HIP].y;
+        float rightHipY = lm[Pose.RIGHT_HIP].y;
+        float avgHipY = (leftHipY + rightHipY) / 2f;
+
+        bool ankleLifted = avgAnkleY < 0.28f;  
+        bool hipLifted = avgHipY < 0.48f;    
+        bool movedUpFast = (prevY - newY) > 0.025f;
+
+        return ankleLifted && hipLifted && movedUpFast;
     }
 
     // Detect arm open-close
