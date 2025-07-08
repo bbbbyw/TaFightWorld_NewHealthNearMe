@@ -130,6 +130,21 @@ public class PoseGameManager : MonoBehaviour
     {
         Instance = this;
 
+    #if UNITY_ANDROID && !UNITY_EDITOR
+    try
+    {
+        using (var javaLangSystem = new AndroidJavaClass("java.lang.System"))
+        {
+            javaLangSystem.CallStatic("loadLibrary", "mediapipe_jni");
+            Debug.Log("✅ Loaded mediapipe_jni via System.loadLibrary");
+        }
+    }
+    catch (AndroidJavaException ex)
+    {
+        Debug.LogError("❌ Failed to load mediapipe_jni manually: " + ex.Message);
+    }
+    #endif
+
         resultPanel.SetActive(false);
         continueButton?.gameObject.SetActive(false);
         pauseVideoButton?.gameObject.SetActive(false);
